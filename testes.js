@@ -1,0 +1,3 @@
+balls = "nuts";
+
+alert(balls);
