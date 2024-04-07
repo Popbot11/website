@@ -1,14 +1,5 @@
 <head>
-    <script>
-        function toggle() {
-            var x = document.getElementById("credits");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-}
-    </script>
+    <script src="index.js"></script>
 </head>
 <body>
     <h1>hello and welcome to my cool website</h1>
@@ -59,7 +50,6 @@
             <h2>other</h2>
             <a href="other/musicList.html">music list</a> <br>
             <a href="other/pageTest.html" target="blank">test page</a><br>
-            <a href="https://earth.google.com/web/@-1.02273465,-119.18109438,-4100.55618263a,1019.21527724d,35y,54.86475516h,0t,0r/data=OgMKATA" target="blank">1°01'24"S 119°10'51"W</a><br>
             <a href="other/coolPeople.html">cool people</a><br>
             <a href="other/pressKit.html">press kit</a>
         </div>
@@ -80,7 +70,9 @@
             <a href="other/email.html" target="blank">Email</a><br>
             <a href="https://discord.gg/RpZ4dt9mUr" target="blank">Discord Server</a><br>
             <a href="other/lessons.html">lessons info</a> <img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"><br>
-            
+            <a href="https://earth.google.com/web/@-1.02273465,-119.18109438,-4100.55618263a,1019.21527724d,35y,54.86475516h,0t,0r/data=OgMKATA" target="blank">1°01'24"S 119°10'51"W</a><br>
+
+
         </div>
     
     </div>
@@ -90,7 +82,10 @@
         
         <p> *<a href="">.setique</a> is the name of my collaborative project with <a href="">boxkitty</a><br>
         <br><hr>
-        <button onclick="toggle()">toggle credits</button><br><br>
+        <button onclick="toggle()" style="float:left;">toggle credits</button>  <a id="counter" style="display: none; float: left;">0</a>
+        <p id="message" style="display: none;">wtf are you doing</p>
+        <br><br>
+        
         <div id="credits" style="display: none;">
             the layout of this website was heavily inspired by <a href="http://www.nurykabe.com/" target="blank">this</a> and <a href="https://billwurtz.com/">this</a>.<br>
             thanks to <a href="https://emily.gg/" target="blank">emilydotgg</a> for helping me out with the basics of getting this website set up. 
