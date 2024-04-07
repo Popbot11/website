@@ -1,3 +1,15 @@
+<head>
+    <script>
+        function toggle() {
+            var x = document.getElementById("credits");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+}
+    </script>
+</head>
 <body>
     <h1>hello and welcome to my cool website</h1>
 
@@ -75,9 +87,17 @@
     
     
     <div style="float:left;  width: 100%;">
-        <hr>
+        
         <p> *<a href="">.setique</a> is the name of my collaborative project with <a href="">boxkitty</a><br>
-        the layout of this website was heavily inspired by <a href="http://www.nurykabe.com/" target="blank">this</a>.<br>
-        thanks to <a href="https://emily.gg/" target="blank">emilydotgg</a> for helping me out with the basics of getting this website set up. She also makes <a href="https://soundcloud.com/emilydotgg" target="blank">music</a>. </p>
+        <br><hr>
+        <button onclick="toggle()">toggle credits</button><br><br>
+        <div id="credits" style="display: none;">
+            the layout of this website was heavily inspired by <a href="http://www.nurykabe.com/" target="blank">this</a> and <a href="https://billwurtz.com/">this</a>.<br>
+            thanks to <a href="https://emily.gg/" target="blank">emilydotgg</a> for helping me out with the basics of getting this website set up. 
+            She also makes <a href="https://soundcloud.com/emilydotgg" target="blank">music</a>. <br>
+            thanks to <a href="https://glyphli.art/">zora</a> for being awesome and helping out with making it so that this website isn't terrible.<br>
+            <a href="https://toyhou.se/7NYX">sevenyx</a> for spellcheck</p>
+
+        </div>
     </div>
 </body>
