@@ -1,3 +1,0 @@
-balls = "nuts";
-
-alert(balls);
