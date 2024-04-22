@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <p>
+            a sort of diffusion / delay thing. All the dsp is inside a gen object. I'll try my best to explain what's happening here:<br>
+            This device is composed of 8 identical allpasses in series. Each individual one is a feedback loop, but the entire system also exists in a feedback loop. <br>
+            The parameters for each allpass can be controlled all at once with the time, feedback, and thru amt controls on the top left of the device. There's also a sine LFO modulating the time for each allpass, which can be edited in the top middle. <br>
+            Both the LFOs and the allpasses have a 'deviation', which means that for each individual allpass the lfo time and feedback time are slightly randomized for each. The deviation amt knobs control the extend of this effect. <br>
+            The section on the far right of the device controls the feedback of the entire system, as opposed to each individual allpass. Messing with this can lead to really intense noises, so be careful. <br>
+            The recompute buttons each re-randomize the randomized delay times and lfo frequencies for the allpasses and LFOs respectively, which is helpful if you want to try out a slightly altared character. <br>
+            Unlike my <a href="badReverb.html">bad reverb</a>, this device is actually resource efficient; meaning it doesn't have 64 individual instances of gen loaded at once. It only has 2. (because stereo). <br>
+            I made this mostly on stream, which you can watch <a href="https://youtube.com/live/P-kzvygAdlk">here</a>. 
+        </p>
+        <img src="media/johnFeedbackExplorerChat.png">
+        <img src="media/johnFeedbackExplorer.png"><br><br>
+        <a href="media/PB John Feedback Explorer.amxd">download</a>
+    </body>
+</html>
