@@ -9,8 +9,18 @@
             opacity: 0;
             pointer-events: none;
         }
+        .mainCol {
+            float: left;
+            padding: 15px;
+        }
+        .offset {
+            transform: translateX(10px);
+        }
         body {
-            margin: 0px;
+            margin: 0px;         
+        }
+        h1 {
+            text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
         }
     </style>
 </head>
@@ -27,16 +37,17 @@
         currently this site is still in its infancy so there's a lot of incomplete and unadded pages. chipping away at it slowly. 
         
         <hr>
-        <div style="width: 100%;">
+        <div style="width: 100%;" >
 
-            <div style="float: left; padding: 15px;">
+            <div class="mainCol" style="border-radius: 5%; background-image: linear-gradient(10deg, rgba(106, 119, 50, 0.89) 25%, rgb(255, 0, 212) 80%, rgba(255, 255, 0, 0) 45%);">
             <h2>music</h2>
                 <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm EP</a><br>
                 <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
                 <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
                 <a href="music/setiqueHarm.html">.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
                 <a href="music/Rope.html">Rope</a><br>
-                <a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br>
+                <div class="offset"><a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br></div>
+                
                 <a href="music/APMCoalition.html">APM - Coalition</a><br>
                 <a href="music/setiqueChurchEdit.html">.setique - T-Pain Church edit</a>* <br>
                 <a href="music/iotaAlbum.html">Iota Album</a><br>
@@ -56,26 +67,33 @@
                 <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a> (INCOMPLETE)<br>
             </div>
             
-            <div style="float: left; padding: 15px;">
-                <h2>contraptions</h2>
-                <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
-                <a href="contraptions/badReverb.html">bad reverb</a><br>
-                <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
-                <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
-                more soon
-                <br>
-            </div>  
+            <div style="float: left;">
+                <div style="background-image: url(other/media/gradient.png); padding: 15px;">
+                    <h2>contraptions</h2>
+                    <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
+                    <a href="contraptions/badReverb.html">bad reverb</a><br>
+                    <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
+                    <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
+                    more soon
+                </div>  <br>
+                <div style="background-image: url(other/media/gradient.png); width: 140%;"><br><br><br></div>
+                <div style="background-image: linear-gradient(320deg ,rgb(255, 153, 0) 0%, rgb(0, 126, 27) 26%, rgba(157, 168, 7, 0) 30%); height: 30%; transform: translateY(-30%); transform: translateX(-50%)"></div>
+            </div>
+            
 
-            <div style="float: left; padding: 15px;">  
-                <h2>other</h2>
-                <a href="other/musicList.html">music list</a> <br>
-                <a href="other/pageTest.html" target="blank">test page</a><br>
-                <a href="other/coolPeople.html">cool people</a><br>
-                <a href="other/pressKit.html">press kit</a>
+            <div class="mainCol">  
+                <div style="padding: 15px; background-color: rgba(52, 63, 128, 0.801);">
+                    <h2 style="color: chartreuse;">Other</h2>
+                    <a href="other/musicList.html">music list</a> <br>
+                    <a href="other/pageTest.html" target="blank">test page</a><br>
+                    <a href="other/coolPeople.html">cool people</a><br>
+                    <a href="other/pressKit.html">press kit</a></div>
+                
+                    <div style="margin-left: 20%; background-color: rgba(137, 206, 97, 0.664); width: 20%; height:2in;"></div>
             </div>
 
 
-            <div style="float: left; padding: 15px; ">
+            <div class="mainCol">
                 <h2>elsewhere</h2>
                 <h3>music</h3>
                 <a href="https://soundcloud.com/popbot1" target="blank">Soundcloud</a><br>
