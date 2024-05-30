@@ -32,6 +32,4 @@ function toggle() {
     if (incr === 350) {
         message.innerHTML = "go outside";
     }    
-    
-
 }
