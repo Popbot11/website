@@ -33,3 +33,7 @@ function toggle() {
         message.innerHTML = "go outside";
     }    
 }
+
+function crazyMode() {
+    document.getElementById("body").classList.add("crazyMode")
+}
