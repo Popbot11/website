@@ -23,31 +23,40 @@
             
             transform: translateX(-70%);
         }
+        .music  a:link{
+            color:rgb(88, 88, 88);}
+        .music a:visited{
+            color:rgb(4, 51, 151);}
+
         body {
             margin: 0px;         
         }
         h1 {
             text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
         }
+
     </style>
 </head>
-<body>
+<body class="box">
     <img src="other/media/fuckYou!.png" class="background" id="arrow">
     <div style="margin: 8px;">
         <h1>hello and welcome to my cool website</h1>
 
         <p>
             My name is Robin, and I make music and music-related things. Most people online know me as Popbot.
-            <br>This website is a place where I put all of the stuff I'm personally involved with, and probably other things too. 
+            <br>This website is a <span style="cursor:help">place where I put all of the stuff I'm personally invol</span>ved with, and probably other things too. 
             <br><a href="other/indexExplainer.html">How is this page organized?</a>
         </p>
         currently this site is still in its infancy so there's a lot of incomplete and unadded pages. chipping away at it slowly. 
         
         <hr>
+        
         <div style="width: 100%;" >
-
-            <div class="mainCol" style="border-radius: 5%; background-image: linear-gradient(10deg, rgba(106, 119, 50, 0.89) 25%, rgb(255, 0, 212) 80%, rgba(255, 255, 0, 0) 45%);">
-            <h2>music</h2>
+            <div align="right"><button>enter Crazy Mode</button> </div>
+            <div class="mainCol music"  style="color: rgba(255, 145, 0, 0.74); border-radius: 5%; background-image: linear-gradient(10deg, rgba(106, 119, 50, 0.89) 25%, rgb(255, 0, 212) 80%, rgba(255, 255, 0, 0) 45%);">
+                
+                <h2>music</h2>
+                
                 <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm EP</a><br>
                 <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
                 <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
@@ -72,6 +81,7 @@
                 <a href="music/thumper.html">Thumper</a> (INCOMPLETE)<br>
                 <a href="music/luminanceEP.html">Luminance EP</a> (INCOMPLETE)<br>
                 <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a> (INCOMPLETE)<br>
+                
             </div>
             
             <div style="float: left;">
@@ -132,7 +142,9 @@
         <div style="float:left;  width: 100%;">   
             
             <br><hr>
-            <button onclick="toggle()" style="float:left;">toggle info</button>  <a id="counter" style="display: none; float: left;">0</a>
+            <button onclick="toggle()" style="float:left;">toggle info</button>
+            
+            <a id="counter" style="display: none; float: left;">0</a>
             <p id="message" style="display: none;">wtf are you doing</p>
             <br><br>
             
