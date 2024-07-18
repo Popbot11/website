@@ -1,0 +1,59 @@
+<html>
+    <style>
+        * {
+            box-sizing: border-box;
+            }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            }
+        .column2 {
+            float: right;
+            width: 50%;
+            padding: 10px;
+            }
+         .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                }
+            }
+    </style>
+    <body>
+        <a href="../index.html">home</a> <a href="./modalResynth.html">Old versions</a><br><br>
+
+        <h2 style="text-align: center;">Modal Synth</h2>
+        <p style="text-align: center;">My first fully featured Max for Live device.</p>
+        <hr>
+        <div class="row"> 
+            <div class="column">
+                <p>It looks like this:</p>
+                <img src="media/modal resynth/modalSynthF.png" width="100%"><br>
+                <p>And it sounds like this:</p>
+                <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1851927702%3Fsecret_token%3Ds-d7hfKgnSFgC&color=%232b2c2b&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=false"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/popbot1" title="Popbot" target="_blank" style="color: #cccccc; text-decoration: none;">Popbot</a> · <a href="https://soundcloud.com/popbot1/sets/modal-synth-demos/s-d7hfKgnSFgC" title="Modal Synth Demos" target="_blank" style="color: #cccccc; text-decoration: none;">Modal Synth Demos</a></div>            
+            </div>
+            
+            <div class="column2">
+                <h3>What is modal synthesis?</h3>
+                <p>Modal synthesis is a type of physical modelling that uses bandpass filters to replicate real-world resonances. </p>
+                <p>
+                    A modal synth is broken up into two primary parts: the <b>exciter</b> and the <b>resonator</b>.<br><br>
+                    The exciter is the driving energy behind the sound. In the real world, something like a drum stick or a guitar pick would be considered exciters. In the case of this synth, there are two exciter sources: A noise generator, and a sampler. <br><br>
+                    The resonator is what transforms the exciter into a tone. It is what "decays" after the inital applied energy, and is responsible for the tonal content of a sound in a modal synthesizer. 
+                </p>
+                <h3>What does modal synthesis actually <i>do</i>?</h2>
+                <p>
+                    A lot of things. From my experience, modal synth is especially amazing at "bell-like" sounds because of the natural sounding decay. In my opinion, this specific device is best for things like bells, pads, and other very tonal sounds. ALTHOUGH, that doesn't mean it's bad for other things. <br><br>
+                    
+                </p>
+                
+            </div>
+        </div>
+    </body>
+</html>
