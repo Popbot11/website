@@ -39,12 +39,20 @@
             color:rgb(184, 199, 54);}
         .music a:visited{
             color:rgb(75, 238, 0);}
-
+        
+        .otherBG{
+            height: 180px;
+            animation-name: other;
+            animation-duration: 4s;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
         .other a:link{
             color:red;}
+            
         .other a:visited{
             color:rgb(255, 0, 242);}
-        
 
         .contact  a:link{
             color:rgb(249, 249, 249);}
@@ -64,10 +72,40 @@
         h1 {
             text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
         }
+        .rotate {
+            transform: rotate(0deg);
+            font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3"; 
+            animation-name: rotation;
+            animation-duration: 60s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+
+        }
+        .derotate{
+            transform: rotate(0deg);
+            animation-name: derotation;
+            animation-duration: 60s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes rotation {
+            0% {transform: rotate(0deg);}
+            100%{transform: rotate(360deg);}
+        }
+        @keyframes derotation {
+            0% {transform: rotate(0deg);}
+            100%{transform: rotate(-360deg);}
+        }
+        @keyframes other {
+            0% {height: 180px}
+            100% {height: 400px}
+        }
 
     </style>
 </head>
 <body class="box" id="body">
+    <title>popbot.work</title>
     <img src="other/media/fuckYou!.png" class="background" id="arrow">
     <div style="margin: 8px;">
         <h1>hello and welcome to my cool website</h1>
@@ -121,30 +159,39 @@
                     <h2>contraptions</h2>
                     <a href="contraptions/noiseInjection.html">noise injection</a><br>
                     <a href="contraptions/filterCrazy.html">filter crazy</a><br>
-                    <a href="contraptions/modalSynth.html">modal synth</a> <img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"><br>
+                    <a href="contraptions/modalSynth.html">modal synth</a> <marquee loop="0" width="100px" style="position:absolute;"><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
                     <a href="contraptions/combobulatorModels.html">combobulator artist brains</a><br>
                     <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
                     <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
                     <a href="contraptions/badReverb.html">bad reverb</a><br>
                     <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
                     
-                </div>  <br>
-                <div style="background-image: url(other/media/gradient.png); width: 140%;"><br><br><br></div>
+                </div>  <br><br>
+                <div class="rotate" style="background-image:  url(other/media/liveTexture.png); padding-left: 20px; padding-top: 10px; margin-left: 10px;">
+                    <div class="derotate" >
+                        <h2>video</h2><p>under construction</p>
+                        > <a href="video/livestreams.html">livestreams list</a> (92) <br>
+                        > <a href="video/tutorials.html">tutorials</a> (14) <br>
+                        > <a href="">misc audio</a><br><br>
+                    </div>
+                </div>
                 
                 <button style="width: 140%; margin-left: 20%; transform: rotate(-5deg); text-align: end;"> <a href="//tools.digitalpoint.com/counter" target="blank"><img src="//count.digitalpoint.com/?t=golfclubs" alt="Free Hit Counter" style="border:0px;width:100px;height:15px;"></a></button>
                 
-                <div class="crazyGradient"></div>
+                <!--<div class="crazyGradient"></div>-->
                 <div width="100%" align="cener" style="text-align: center; color: rgba(0, 0, 0, 0.158); font-family: Georgia, 'Times New Roman', Times, serif;">owo</div>
             </div>
         
             <div class="mainCol">  
                 <div class="other" style="padding: 15px; background-color: rgba(52, 63, 128, 0.801);">
+                    <div class="otherBG" style="position: absolute; width: 100px; background-color: rgba(0, 0, 0, 0.141);">
+                    </div>
                     <h2 style="color: chartreuse;">Other</h2>
-                    <a href="other/musicList.html">music list</a> <br>
-                    <a href="other/pageTest.html" target="blank">test page</a><br>
-                    <a href="other/coolPeople.html">cool people</a><br>
-                    <a href="other/pressKit.html">press kit</a><br>
-                    <a href="other/oldWebsite.html">old website</a><br>
+                        <a href="other/musicList.html">music list</a> <br>
+                        <a href="other/pageTest.html" target="blank">test page</a><br>
+                        <a href="other/coolPeople.html">cool people</a><br>
+                        <a href="other/pressKit.html">press kit</a><br>
+                        <a href="other/oldWebsite.html">old website</a><br>
                     
                 </div>
                 
@@ -201,8 +248,7 @@
                 the layout of this website was inspired by <a href="http://www.nurykabe.com/" target="blank">this</a> and <a href="https://billwurtz.com/" target="blank">this</a>.<br>
                 
                 <a href="https://emily.gg/" target="blank">emilydotgg</a> for helping me out with the basics of getting this website set up.  <br>
-                <a href="https://glyphli.art/" target="blank">zora</a> for being awesome and helping out with making it so that this website isn't terrible.<br>
-                <a href="https://toyhou.se/7NYX" target="blank">sevenyx</a> for spellcheck and definitley nothing else</p>
+                <a href="https://glyphli.art/" target="blank">zora</a> for being awesome and helping out with making it so that this website isn't terrible.<br></p>
             </div>
         <br>
             
