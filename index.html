@@ -10,6 +10,7 @@
 </script>
     <script src="index.js"></script>
     <style>
+        
         .ic{
             pointer-events: none;
         }
@@ -36,14 +37,14 @@
             pointer-events: none;
         }
         .musicOuter{
-            width: 250px;
-           
-            
+            width: 250px;    
         }
+        
         .musicInner{
-            width:  95%;
+            width:  250px;
             height: 450px;
             overflow-y: auto;
+            overflow-x: auto;
         }
         .musicInner a:link{
             color:rgb(184, 199, 54);}
@@ -53,6 +54,8 @@
             color: black;
         }
         
+       
+
         .otherBG{
             height: 180px;
             animation-name: other;
@@ -80,8 +83,12 @@
         .crazyMode{
             scale: 105%;
         }
+        .dripMode{
+            background-image:url(other/media/skull-laughter.gif);
+        }
         body {
             margin: 0px;         
+            
         }
         .heading {
             text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
@@ -115,23 +122,23 @@
             0% {height: 180px}
             100% {height: 400px}
         }
-
+        #drip{
+            position: absolute;
+        }
     </style>
 </head>
 <body class="box" id="body">
     <title>popbot.work</title>
-    <img src="other/media/fuckYou!.png" class="background" id="arrow">
+    <img src="other/media/fuckYou!.png" class="background" id="arrow" style="z-index: 99 !important;">
     <div style="margin: 8px;">
         <h1 class="heading">hello and welcome to my cool website</h1>
 
         <p>
             My name is Robin,<a style="font-size: 17px;"> and I make music and music-related things</a>. Most people online know me as Popbot.
             <br>This <a style="color: rgb(0, 174, 255);">website</a> is a <span style="cursor:help">place where I put all of the stuff I'm personally invol</span>ved with, and probably other things too. 
-            <br><a href="other/indexExplainer.html">How is this page organized?</a> (Newer items are added at the top)
+            <br><a href="other/indexExplainer.html">How is this page organized?</a>
         </p>
-        <a style="font-family: cursive;">
-        eventually i'll change the font colours to be more readable   
-        </a>
+        <h3>Newer items are added at the top</h3>
         <hr>
         
         <div style="width: 100%;">
@@ -143,28 +150,28 @@
                     
                     <a href="music/anv9.html">All Nighter Vol. 9</a><br>        
                     <a href="music/Stardust.html">Stardust</a><br>
-                    <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm EP</a><br>
+                    EP - <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm</a><br>
                     <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
                     <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
-                    <a href="music/setiqueHarm.html">.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
+                    <a href="music/setiqueHarm.html" >.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
                     <a href="music/Rope.html">Rope</a><br>
                     <a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br>
                     <a href="music/APMCoalition.html">APM - Coalition</a><br>
-                    <a href="music/setiqueChurchEdit.html">.setique - T-Pain Church edit</a>* <br>
-                    <a href="music/iotaAlbum.html">Iota Album</a><br>
+                    <a href="music/setiqueChurchEdit.html" class="setique">.setique - T-Pain Church edit</a>* <br>
+                    Album - <a href="music/iotaAlbum.html">Iota</a><br>
                     <a href="music/lazerbeamRagtimeEdit.html">lazerbeam ragtime Edit</a><br>
                     <a href="music/likeThis.html">Like This</a><br>
-                    <a href="music/spittleSpringsEP.html">Spittle Springs EP</a> <br>
-                    <a href="music/nodesEP.html">Nodes EP</a><br>
-                    <a href="music/producerHubMegacollab.html">Producer Hub Megacollab EP</a> <br>
+                    EP - <a href="music/spittleSpringsEP.html">Spittle Springs</a> <br>
+                    EP - <a href="music/nodesEP.html">Nodes</a><br>
+                    EP - <a href="music/producerHubMegacollab.html">Producer Hub Megacollab</a> <br>
                     <a href="music/cyberprifge.html">Cyberfridge</a> <br>
                     <a href="music/restitution.html">Restitution</a><br>
-                    <a href="music/reactantEP.html">Reactant EP</a><br>
+                    EP - <a href="music/reactantEP.html">Reactant</a><br>
                     <a href="music/resen.html">Resen</a> <br>
                     <a href="music/forLoopLoop.html">For Loop Loop</a><br>
-                    <a href="music/depthEP.html">Depth EP</a><br>
+                    EP - <a href="music/depthEP.html">Depth</a><br>
                     <a href="music/thumper.html">Thumper</a><br>
-                    <a href="music/luminanceEP.html">Luminance EP</a><br>
+                    EP - <a href="music/luminanceEP.html">Luminance</a><br>
                     <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a><br>
                 
                 </div>
@@ -247,7 +254,8 @@
         </div>
         <div align="right">
             <button onclick="crazyMode()" align="right">enter Crazy Mode</button> 
-            <div class="ic" align="right"  style="transform: translateY(-30px);"><a><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=171701&s=37' border='0' alt='Free Website Hit Counter'></a></div>
+            <button onclick="dripMode()" align="right">enter Drip Mode</button> 
+            <!-- <div class="ic" align="right"  style="transform: translateY(-30px);"><a><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=171701&s=37' border='0' alt='Free Website Hit Counter'></a></div> -->
         </div>    
         <div style="float:left;  width: 100%;">   
             
@@ -269,4 +277,5 @@
             
         
     </div>
+    <img src="other/media/skull-thunder.gif" id="drip" hidden>
 </body>

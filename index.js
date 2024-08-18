@@ -37,3 +37,7 @@ function toggle() {
 function crazyMode() {
     document.getElementById("body").classList.add("crazyMode")
 }
+function dripMode() {
+    document.getElementById("drip").hidden = false
+    document.getElementById("body").classList.add("dripMode")
+}
