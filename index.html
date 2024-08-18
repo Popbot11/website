@@ -35,10 +35,23 @@
             transform: translateX(-70%);
             pointer-events: none;
         }
-        .music a:link{
+        .musicOuter{
+            width: 250px;
+           
+            
+        }
+        .musicInner{
+            width:  95%;
+            height: 450px;
+            overflow-y: auto;
+        }
+        .musicInner a:link{
             color:rgb(184, 199, 54);}
-        .music a:visited{
+        .musicInner a:visited{
             color:rgb(75, 238, 0);}
+        .musicInner h1{
+            color: black;
+        }
         
         .otherBG{
             height: 180px;
@@ -50,6 +63,7 @@
         }
         .other a:link{
             color:red;}
+            
             
         .other a:visited{
             color:rgb(255, 0, 242);}
@@ -69,7 +83,7 @@
         body {
             margin: 0px;         
         }
-        h1 {
+        .heading {
             text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
         }
         .rotate {
@@ -108,7 +122,7 @@
     <title>popbot.work</title>
     <img src="other/media/fuckYou!.png" class="background" id="arrow">
     <div style="margin: 8px;">
-        <h1>hello and welcome to my cool website</h1>
+        <h1 class="heading">hello and welcome to my cool website</h1>
 
         <p>
             My name is Robin,<a style="font-size: 17px;"> and I make music and music-related things</a>. Most people online know me as Popbot.
@@ -120,40 +134,41 @@
         </a>
         <hr>
         
-        <div style="width: 100%;" >
+        <div style="width: 100%;">
             
-            <div class="mainCol music"  style="color: rgba(255, 145, 0, 0.74); border-radius: 5%; background-image: linear-gradient(10deg, rgba(76, 85, 37, 0.89) 25%, rgb(182, 0, 152) 80%, rgba(255, 255, 0, 0) 45%);">
+            <div class="musicOuter">
                 
-                <h2>music</h2>
+                <div class="mainCol musicInner"  style="color: rgba(255, 145, 0, 0.74); border-radius: 5%; background-image: linear-gradient(10deg, rgba(76, 85, 37, 0.89) 25%, rgb(182, 0, 152) 80%, rgba(255, 255, 0, 0) 45%);">
+                    <h1 >music</h1>
+                    
+                    <a href="music/anv9.html">All Nighter Vol. 9</a><br>        
+                    <a href="music/Stardust.html">Stardust</a><br>
+                    <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm EP</a><br>
+                    <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
+                    <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
+                    <a href="music/setiqueHarm.html">.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
+                    <a href="music/Rope.html">Rope</a><br>
+                    <a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br>
+                    <a href="music/APMCoalition.html">APM - Coalition</a><br>
+                    <a href="music/setiqueChurchEdit.html">.setique - T-Pain Church edit</a>* <br>
+                    <a href="music/iotaAlbum.html">Iota Album</a><br>
+                    <a href="music/lazerbeamRagtimeEdit.html">lazerbeam ragtime Edit</a><br>
+                    <a href="music/likeThis.html">Like This</a><br>
+                    <a href="music/spittleSpringsEP.html">Spittle Springs EP</a> <br>
+                    <a href="music/nodesEP.html">Nodes EP</a><br>
+                    <a href="music/producerHubMegacollab.html">Producer Hub Megacollab EP</a> <br>
+                    <a href="music/cyberprifge.html">Cyberfridge</a> <br>
+                    <a href="music/restitution.html">Restitution</a><br>
+                    <a href="music/reactantEP.html">Reactant EP</a><br>
+                    <a href="music/resen.html">Resen</a> <br>
+                    <a href="music/forLoopLoop.html">For Loop Loop</a><br>
+                    <a href="music/depthEP.html">Depth EP</a><br>
+                    <a href="music/thumper.html">Thumper</a><br>
+                    <a href="music/luminanceEP.html">Luminance EP</a><br>
+                    <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a><br>
                 
-                <a href="music/Stardust.html">Stardust</a><br>
-                <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm EP</a><br>
-                <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
-                <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
-                <a href="music/setiqueHarm.html">.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
-                <a href="music/Rope.html">Rope</a><br>
-                <div class="offset"><a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br></div>
-                
-                <a href="music/APMCoalition.html">APM - Coalition</a><br>
-                <a href="music/setiqueChurchEdit.html">.setique - T-Pain Church edit</a>* <br>
-                <a href="music/iotaAlbum.html">Iota Album</a><br>
-                <a href="music/lazerbeamRagtimeEdit.html">lazerbeam ragtime Edit</a><br>
-                <a href="music/likeThis.html">Like This</a><br>
-                <a href="music/spittleSpringsEP.html">Spittle Springs EP</a> <br>
-                <a href="music/nodesEP.html">Nodes EP</a><br>
-                <a href="music/producerHubMegacollab.html">Producer Hub Megacollab EP</a> <br>
-                <a href="music/cyberprifge.html">Cyberfridge</a> <br>
-                <a href="music/restitution.html">Restitution</a><br>
-                <a href="music/reactantEP.html">Reactant EP</a><br>
-                <a href="music/resen.html">Resen</a> <br>
-                <a href="music/forLoopLoop.html">For Loop Loop</a><br>
-                <a href="music/depthEP.html">Depth EP</a><br>
-                <a href="music/thumper.html">Thumper</a><br>
-                <a href="music/luminanceEP.html">Luminance EP</a><br>
-                <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a><br>
-                
+                </div>
             </div>
-            
             <div style="float: left;">
                 <div style="background-image: url(other/media/gradient.png); padding: 15px;">
                     <h2>contraptions</h2>
