@@ -37,19 +37,22 @@
             pointer-events: none;
         }
         .musicOuter{
-            width: 250px;    
+            width: 251px;  
+
+            /* color:aliceblue */
         }
         
         .musicInner{
             width:  250px;
             height: 450px;
-            overflow-y: auto;
-            overflow-x: auto;
+            overflow-y: scroll;
+            overflow-x: visible;
+            white-space: nowrap;
         }
         .musicInner a:link{
-            color:rgb(184, 199, 54);}
-        .musicInner a:visited{
             color:rgb(75, 238, 0);}
+        .musicInner a:visited{
+            color:rgb(184, 199, 54);}
         .musicInner h1{
             color: black;
         }
@@ -92,6 +95,10 @@
         }
         .heading {
             text-shadow: 0px 0px 3px rgb(0, 0, 0), 10px 10px 20px rgba(0, 192, 250, 0.397);
+        }
+        .date {
+            color:rgb(255, 208, 0)
+            
         }
         .rotate {
             transform: rotate(0deg);
@@ -147,36 +154,37 @@
                 
                 <div class="mainCol musicInner"  style="color: rgba(255, 145, 0, 0.74); border-radius: 5%; background-image: linear-gradient(10deg, rgba(76, 85, 37, 0.89) 25%, rgb(182, 0, 152) 80%, rgba(255, 255, 0, 0) 45%);">
                     <h1 >music</h1>
-                    <a href="music/ambiences.html">ambiences</a><br>
-                    <a href="music/crazyn7uts.html">crazyn7uts</a><br>
-                    <a href="music/precision.html">Precision</a><br>
-                    EP - <a href="music/creatureEP.html">Creature</a><br>    
-                    <a href="music/anv9.html">All Nighter Vol. 9</a><br>      
-                    <a href="music/Helicity.html">Helicity</a><br>  
-                    <a href="music/Stardust.html">Stardust</a><br>
-                    EP - <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm</a><br>
-                    <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
-                    <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
-                    <a href="music/setiqueHarm.html" >.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
-                    <a href="music/Rope.html">Rope</a><br>
-                    <a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br>
-                    <a href="music/APMCoalition.html">APM - Coalition</a><br>
-                    <a href="music/setiqueChurchEdit.html" class="setique">.setique - T-Pain Church edit</a>* <br>
-                    Album - <a href="music/iotaAlbum.html">Iota</a><br>
-                    <a href="music/lazerbeamRagtimeEdit.html">lazerbeam ragtime Edit</a><br>
-                    <a href="music/likeThis.html">Like This</a><br>
-                    EP - <a href="music/spittleSpringsEP.html">Spittle Springs</a> <br>
-                    EP - <a href="music/nodesEP.html">Nodes</a><br>
-                    EP - <a href="music/producerHubMegacollab.html">Producer Hub Megacollab</a> <br>
-                    <a href="music/cyberprifge.html">Cyberfridge</a> <br>
-                    <a href="music/restitution.html">Restitution</a><br>
-                    EP - <a href="music/reactantEP.html">Reactant</a><br>
-                    <a href="music/resen.html">Resen</a> <br>
-                    <a href="music/forLoopLoop.html">For Loop Loop</a><br>
-                    EP - <a href="music/depthEP.html">Depth</a><br>
-                    <a href="music/thumper.html">Thumper</a><br>
-                    EP - <a href="music/luminanceEP.html">Luminance</a><br>
-                    <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a><br>
+                    <a class="date">m/d/y</a> - Release Type - <a href="">Release Title</a><br><hr>
+                    <a class="date">9/13/24</a> - <a href="music/ambiences.html">ambiences</a><br>
+                    <a class="date">8/30/24</a> - <a href="music/crazyn7uts.html">crazyn7uts</a><br>
+                    <a class="date">8/23/24</a> - <a href="music/precision.html">Precision</a><br>
+                    <a class="date">~8/20/24</a> - EP - <a href="music/creatureEP.html">Creature</a><br>    
+                    <a class="date">8/17/24</a> -  <a href="music/anv9.html">All Nighter Vol. 9</a><br>      
+                    <a class="date">7/7/24</a> - <a href="music/Helicity.html">Helicity</a><br>  
+                    <a class="date">6/13/24</a> - <a href="music/Stardust.html">Stardust</a><br>
+                    <a class="date">3/2/24</a> - EP - <a href="music/simulatedMicrocosmEP.html" style="text-align: center;">Simulated Microcosm</a><br>
+                    <a class="date">1/13/24</a> - <a href="music/corpsewave2024.html">Corpsewave 2024 - KUSARI</a><br>
+                    <a class="date">1/21/23</a> - <a href="music/stasysSVS2023.html">Stasys SVS 2023</a><br>
+                    <a class="date">10/16/23</a> - <a href="music/setiqueHarm.html" >.setique - harm</a><a href="other/media/moron.mp4" style="color: black;">*</a><br>
+                    <a class="date">8/25/23</a> - <a href="music/Rope.html">Rope</a><br>
+                    <a class="date">8/4/23</a> - <a href="music/sonobusFeedbackLoops.html">sonobus feedback loops</a><br>
+                    <a class="date">6/29/23</a> - <a href="music/APMCoalition.html">APM - Coalition</a><br>
+                    <a class="date">5/25/23</a> - <a href="music/setiqueChurchEdit.html" class="setique">.setique - T-Pain Church edit</a>* <br>
+                    <a class="date">5/20/23</a> - Album - <a href="music/iotaAlbum.html">Iota</a><br> 
+                    <a class="date">2/4/23</a> - <a href="music/lazerbeamRagtimeEdit.html">lazerbeam ragtime Edit</a><br>
+                    <a class="date">1/22/23</a> - <a href="music/likeThis.html">Like This</a><br>
+                    <a class="date">3/31/23</a> - EP - <a href="music/spittleSpringsEP.html">Spittle Springs</a> <br>
+                    <a class="date">2/26/22</a> - <a class="date">2/24/24</a> - EP - <a href="music/nodesEP.html">Nodes</a><br>
+                    <a class="date">never released</a> - EP - <a href="music/producerHubMegacollab.html">Producer Hub Megacollab</a> <br>
+                    <a class="date">1/10/22</a> - <a href="music/cyberprifge.html">Cyberfridge</a> <br>
+                    <a class="date">12/1/21</a> - <a href="music/restitution.html">Restitution</a><br>
+                    <a class="date">9/18/21</a> - EP - <a href="music/reactantEP.html">Reactant</a><br>
+                    <a class="date">4/25/21</a> - <a href="music/resen.html">Resen</a> <br>
+                    <a class="date">4/16/21</a> - <a href="music/forLoopLoop.html">For Loop Loop</a><br>
+                    <a class="date">3/25/21</a> - EP - <a href="music/depthEP.html">Depth</a><br>
+                    <a class="date">2/13/21</a> - <a href="music/thumper.html">Thumper</a><br>
+                    <a class="date">9/29/20</a> - EP - <a href="music/luminanceEP.html">Luminance</a><br>
+                    <a class="date">various</a> - <a href="music/oldSoundcloudStuff.html">old soundcloud stuff</a><br>
                 
                 </div>
             </div>
@@ -187,7 +195,7 @@
                     free - <a href="contraptions/noiseInjection.html">noise injection</a><br>
                     free - <a href="contraptions/filterCrazy.html">filter crazy</a><br>
                     paid - <a href="contraptions/modalSynth.html">modal synth</a> <marquee loop="0" width="100px" style="position:absolute;"><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
-                    free - <a href="contraptions/combobulatorModels.html">combobulator artist brains</a><br>
+                    paid - <a href="contraptions/combobulatorModels.html">combobulator artist brains</a><br>
                     free - <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
                     free - <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
                     free - <a href="contraptions/badReverb.html">bad reverb</a><br>
