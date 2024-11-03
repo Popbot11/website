@@ -100,6 +100,29 @@
             color:rgb(255, 208, 0)
             
         }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
         .rotate {
             transform: rotate(0deg);
             font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3"; 
@@ -254,6 +277,7 @@
                 <a href="https://bsky.app/profile/popbot.work" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Bluesky</a><br>
                 <a href="https://www.instagram.com/popbot_/?hl=af" target="_blank">Instagram</a> (inactive)<br>
                 <a href="https://www.youtube.com/channel/UCckNFTtfD7FKCqbTE5UBVPw" target="_blank" style="color: blue;">Youtube Channel</a><br>
+                <a href="https://github.com/Popbot11" target="_blank">github</a> <div class="tooltip">hover for tooltip<span class="tooltiptext">my github is pretty innactive; the only things on there are the code for this website (it's public since i'm using github pages to host it) and maybe some other projects. most of my stuff is in a private repository. i am still a little baby when it comes to programming </span></div>
                 
                 <div class="ic" style="position: absolute; width: 200px; height: 100px; margin-left: -100px; background-image: linear-gradient(red 0%, rgba(255, 0, 123, 0.276) 10%, rgba(0, 0, 0, 0) 100%);"></div>
                 <h3 style="font-family: 'Courier New', Courier, monospace;">contact</h3>
