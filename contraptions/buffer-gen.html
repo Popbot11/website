@@ -1,0 +1,29 @@
+<html>
+    <head>
+                                        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMF5SZ58X2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZMF5SZ58X2');
+        </script>
+        <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+    </head>
+    <body>
+        <a href="../index.html">home</a><br><br>
+        <md-block>
+            # THIS IS A WIP :)
+            buffer-gen is a sort of long-term project of mine. Previous to this i haven't ever really tried to program anything from scratch. I've done a little bit of coding in the past but it was mostly very small scripts for larger projects, usually in max. <br>
+            for this, I'm using Rust, which i am learning allong side my progress on this project. I am also a beinner coder so my code will by no means be good. I'm using the scope of this project as a tool for myself to be motivated to learn something challenging, which is the Rust programming language, as well as just coding concepts in general. <br><br>
+            my aim is to create some software that can process and synthesize audio using non-realtime methods by freely passing buffers between modules. Ideally, the interface would present some sort of module node-based workflow, which would then be converted (somehow... havent figured that much out yet) into a network of modules passing buffers between each other, which would then synthesize/process audio according to the indicated signal flow. The important bit is that it's non-realtime. <br>
+            an example use case would be to like... idk. generate a bunch of kick samples in bulk. You could establish some network of modules that generates a kick sample, and attach that network to a module that renders whatever network is above it in the chain multiple times. if you included a random source in that repeated network, you could generatively synthesize a bunch of kick samples in bulk. <br>
+            or maybe you wanna normalize a bunch of samples at the same time, or do some wild convolution or feedback shit that isn't feasable with realtime audio.. idk. that's the goal. as i'm writing this i have the structure for the way modules interact with eachother to allow for (within reason) infinite inputs, outputs, and instances of modules, although i haven't gotten much past that. I'm uploading devlogs to an alternate youtube channel, here' sthe url to that channel:
+
+
+        </md-block>
+        <a href="https://www.youtube.com/@PopbotDevlog" target="_blank">alt youtube channel w/ devlogs</a><hr>
+        <p>oh also here's a <a href="https://github.com/Popbot11/buffer_gen">github repository</a> if this ever gets to a point where it's actually usable (or if you just wanna look at my bad code)</p>
+    </body>
+</html>
