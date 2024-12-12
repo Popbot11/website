@@ -25,5 +25,23 @@
         </md-block>
         <a href="https://www.youtube.com/@PopbotDevlog" target="_blank">alt youtube channel w/ devlogs</a><hr>
         <p>oh also here's a <a href="https://github.com/Popbot11/buffer_gen">github repository</a> if this ever gets to a point where it's actually usable (or if you just wanna look at my bad code)</p>
+        <hr>
+        <p>
+            update 12/12/24 ~2:00 am
+        </p>
+        <p>
+            ok so i just got a pseudo preset file working! very veyr very happy about this. my code, of course, is quite ass, but i'm honestly not too worried about that at the moment. I've got it able to load toml files formatted in a particular way as a preset, and parse that, then run the code and generate the audio. which is fucking. yes. it feels so real; liek i'm actually at the point where it's a real thing that is maybe useful. 
+        </p>
+        <p>
+            <a href="buffer-gen/testchain.toml">here's</a> the toml i've been testing everything with. It generates exactly half a second of +0.5 DC offset :3 <br>
+            I think the next things I wanna do would be to implement the sin function (probably just pasting the dsp code from previous iterations that were structured a lto differently), implement audio file imports, and have a way to do everything in bulk.
+        </p>
+        <p>
+            my thinking is that this "everything in bulk" idea would just take form as a singular module that take whanever chain exists above it and runs it multiple times while incrementing some value passed to each of the param modules it contains each time it runs. I'm not sure how this would work with the contents of the buffer cache since id want to be able to both overwrite shit and add new entries dynamically per iteration. it presents a challenge. I'm pretty sure I have something in place to facilitate the passing of some incremental value between module instances, so that shouldn't be an issue. OH as i'mw riting this i'm also thinking it would be a good idea to have a param_rand module that just generates a random value between two extremes. ill maybe do this tomorrow to get into the zone or whatever and then i'll get to it. actualy maybe this is harder than i think if i want the random value to be static and not change with each sample. hmm. ok well its 2 am and i need to sleep. 
+            gonna merge the branch i created for this particular feature and then sleep. it snowed tonight and i wanna get up somewhat early tomorrow morning and go for a walk before all the snow gets messiedup by peoples footprints. 
+        </p>
+        <p>
+            oh also one more thing i may have already mentioned; he fact that i have an actual file *external* of the code means that trying to make a frontend for this is going to be a little bit more straightforward than I was initially thinking. I was expecting to have to be passing the module cache back and forth between a bunch of shit which would have been a nightmare with the borrow checker. since here the module cache is immutable it makes all of that soo much easier. nayways time to sleep good night meow meow
+        </p>
     </body>
 </html>
