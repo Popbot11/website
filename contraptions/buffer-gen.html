@@ -10,6 +10,23 @@
             gtag('config', 'G-ZMF5SZ58X2');
         </script>
         <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+        
+        <style>
+            .collapsible {
+                cursor: pointer;
+                padding: 18px;
+                font-size: 15px;
+            }
+            
+            
+            .content {
+                padding-left: 20px;
+                padding-right: 20px;
+                display: none;
+                overflow: hidden;
+                background-color: #f1f1f1;
+            }
+            </style>
     </head>
     <body>
         <a href="../index.html">home</a><br><br>
@@ -43,5 +60,359 @@
         <p>
             oh also one more thing i may have already mentioned; he fact that i have an actual file *external* of the code means that trying to make a frontend for this is going to be a little bit more straightforward than I was initially thinking. I was expecting to have to be passing the module cache back and forth between a bunch of shit which would have been a nightmare with the borrow checker. since here the module cache is immutable it makes all of that soo much easier. nayways time to sleep good night meow meow
         </p>
+        <hr>
+        <p>
+            update 12/14/24 12:35 AM
+        </p>
+        <p>
+            ok so not as much progress as the last update but i am thinking about it so i'm just gonna write a quick one. 
+        </p>
+        <p>
+            I got a sin function working and also the module that is able to do whatever exists above it in bulk. its called repeat. im pretty happy with it. using this I can generate say, 150 audio files, each containing a sine whos frequency increents by 50 hz for each consecutive audio file. it generates all of this reasonably quickly, so im excited to see how far i can optimize the code. to run as efficient as possible. or maybe not. idk. maybe that shouldnt be my main goal rn. but whatever, it works!
+            I also implemented a noise module that just outputs white noise, a scale_static module that does the same thing as the scale module but with f32s as inputs instead of 4 extra signals to take from,
+            and of course the param_rep module, which will return an incrementally larger number for each repetetion (or rep, as i'm calling it) thats invoked by the previously mentioned repeat module.
+
+        </p>
+        <p>
+            my next big task is to make a system that enables me to work with time-based stuff way more efficiently. with my current setup, say I wanted to have a ridiculously simple <a href="https://ccrma.stanford.edu/~jos/fp/Definition_Simplest_Low_Pass.html">low pass filter</a>. this requires a single-sample delay, which means I need to request two samples from the above module instead of just one, doubling the amt of work that has to be done by whatever modules exist above this hypothetical simple lpf. 
+            <br>
+            ive gotta be able to memoize stuff on a per-module basis, which is difficult for me to figure out how to do since the module, because of the fact that the entire module chain is recursvie, has to go out of scope in order for another sample to be requested from it, which <i>i think(???)</i> means that i cant easily store values in an instance of the module. 
+            my idea earlier today was to instead store the input buffer information in an instance of a class that also defines the input parameters, but this is kinda ughhh icky maybe. idk. but yeah i really wwant to implement this memoization system before i try and do any seriously time-based processing so that i dont have to rewrite a bunch of code once i decide to optimize stuff. idk. still learning still learning still learning. 
+        </p>
+        <p>
+            oh also i came up with a list of modules i want to implement at some point; some way more difficult than others. i'll probably start on all these way later on in the process but for now here's a list of all the shit i at some point wanna do (and feel liek i probably could do most of these with my current skill, maybe):
+        </p>
+        <button type="buttom" class="collapsible">show the big list of modules i wanna make at some point</button>
+        <div class="content">
+                <ul>
+                    <li><p>crossfades</p>
+                    <ul>
+                    <li>fades between two signal inputs given a value between 0 and 1 inclusive</li>
+                    <li><code>crossfade_cg_lin</code><ul>
+                    <li>linear constant gain crossfade</li>
+                    </ul>
+                    </li>
+                    <li><code>crossfade_cg_cos</code><ul>
+                    <li>cosine constant gain crossfade</li>
+                    </ul>
+                    </li>
+                    <li><code>crossfade_cp</code><ul>
+                    <li>constant power crossfade (using sqrts)</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>generators/oscillators</p>
+                    <ul>
+                    <li>all function the same as sin - freq signal input and phase signal input (0.0 - 1.0, but a modulo is applied so an input value of 2.0 would be 0 degrees offset, as would inputs 1, 0, 3, etc.)</li>
+                    <li><code>triangle</code><ul>
+                    <li>simple triangle wave oscillator</li>
+                    </ul>
+                    </li>
+                    <li><code>square</code><ul>
+                    <li>simple square oscillator </li>
+                    </ul>
+                    </li>
+                    <li><code>rectangle</code><ul>
+                    <li>pulse oscillator with added pwm signal input.</li>
+                    <li>pwm value of 0.0 = fully -1.0 DC, pwm value of 1.0 = fully +1.0 DC, value of 0.5 is equivalent to square</li>
+                    </ul>
+                    </li>
+                    <li><code>saw</code><ul>
+                    <li>simple saw wave generator. should it be ramp up or ramp down? which is better? (since you could just invert phase either way; not very useful to have both as unique modules)</li>
+                    </ul>
+                    </li>
+                    <li><code>tri_saw</code><ul>
+                    <li>morph between saw and triangle </li>
+                    <li>not a simple crossfade. this would adjust the slopes of two line segments </li>
+                    <li>morph value of 0.0 results in pure triangle, morph value of 1.0 results in pure saw</li>
+                    </ul>
+                    </li>
+                    <li><code>phasor</code><ul>
+                    <li>up saw that has an output range from 0. to 1.0 instead of -1. to 1. </li>
+                    <li>also maybe useful to have an extra signal input where if it exceeds some value (say 1.0 exclusive), the phasor will reset upon receiving </li>
+                    </ul>
+                    </li>
+                    <li><code>noise_pink</code><ul>
+                    <li>pink noise generator</li>
+                    </ul>
+                    </li>
+                    <li><code>noise_white</code><ul>
+                    <li>white noise generator</li>
+                    </ul>
+                    </li>
+                    <li><code>noise_sah</code><ul>
+                    <li>sah noise generator (2nd signal input specifying the frequency)</li>
+                    </ul>
+                    </li>
+                    <li><code>noise_sah_smooth</code><ul>
+                    <li>smooth sah noise generator, sample freq input signal</li>
+                    </ul>
+                    </li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    <li><p>buffer stuff</p>
+                    <ul>
+                    <li><code>lookup_phase</code><ul>
+                    <li>input is some signal and the name of a buffer to use as a lookup table</li>
+                    <li>input signal is from 0.0 to 1.0, 0.0 is first sample of lookup table and 1.0 is last sample of lookup table. </li>
+                    <li>unsure if i should have diferent individual modules for diferent interpolation modes but that&#39;s not an issue for now</li>
+                    </ul>
+                    </li>
+                    <li><code>lookup_sample</code><ul>
+                    <li>same as lookup phase except that the input directly indexes the buffer instead of being later converted into a sample to index it with. </li>
+                    </ul>
+                    </li>
+                    <li><code>wavetable</code><ul>
+                    <li>input is playback frequency and a buffer to use as a wavetable</li>
+                    </ul>
+                    </li>
+                    <li><code>clone</code><ul>
+                    <li>creates a clone of a buffer with a new name</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>distortion</p>
+                    <ul>
+                    <li><code>clip</code><ul>
+                    <li>simple clipper. 3 input signals; one being the signal to be clipped, and the other two being the lower and upper thresholds for the clipper. </li>
+                    </ul>
+                    </li>
+                    <li><code>fold</code><ul>
+                    <li>same as clip but it does wavefolding</li>
+                    </ul>
+                    </li>
+                    <li><code>wrap</code><ul>
+                    <li>same as clip but it wraps the audio around instead of folding it down or limiting it to an extreme. (input valule of -1.1 would map to an output value of 0.9. 1.1 -&gt; -0.9, 2 -&gt; 0, 2.9 -&gt; 0.9, 3.4 -&gt; -0.6)</li>
+                    </ul>
+                    </li>
+                    <li><code>quantize</code><ul>
+                    <li>two signal inputs; one being the signal to be quantized the other being the amt of quantization. not sure what id want the range of that other value to be tbh. not sure how the math works so. yea. i&#39;d want it to be more nuanced than bit reduction</li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>utility </p>
+                    <ul>
+                    <li><code>normalize</code><ul>
+                    <li>one signal input, one f32 input (dB). normalizes the input to the db thresh specified. will have to have access to an entie buffer. ugh not sure how i&#39;d do that with reasonable efficiency</li>
+                    </ul>
+                    </li>
+                    <li><code>reverse</code><ul>
+                    <li>assuming we know the length of the buffer, it just requests the opposing sample from the above module. so if you ask the reverse module for the first sample, it would ask the module above it for the last sample</li>
+                    <li>might be easiest to just have a static input that says the intended length of the buffer</li>
+                    </ul>
+                    </li>
+                    <li><code>since_trig</code><ul>
+                    <li>reports the number of samples elapsed since the last time the input signal exceeded 1.0 inclusive</li>
+                    </ul>
+                    </li>
+                    <li>safe<ul>
+                    <li>returns 0 if it receives a nan </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>math</p>
+                    <ul>
+                    <li>arithmatic<ul>
+                    <li><code>multiply</code></li>
+                    <li><code>add</code></li>
+                    <li><code>subtract</code></li>
+                    <li><code>modulo</code></li>
+                    <li><code>divide</code></li>
+                    <li><code>divide_safe</code></li>
+                    <li><code>exponent</code></li>
+                    <li><code>log</code></li>
+                    <li><code>abs</code></li>
+                    <li><code>reciprocal</code> </li>
+                    <li><code>reciprocal_safe</code></li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    <li>trig<ul>
+                    <li><code>sin</code></li>
+                    <li><code>cos</code></li>
+                    <li><code>tan</code></li>
+                    <li><code>tan_safe</code></li>
+                    </ul>
+                    </li>
+                    <li>series<ul>
+                    <li><code>tree</code></li>
+                    <li><code>fib</code></li>
+                    <li><code>factorial</code></li>
+                    </ul>
+                    </li>
+                    <li>comparison<ul>
+                    <li><code>greater_equal</code></li>
+                    <li><code>less_equal</code></li>
+                    <li><code>greater</code></li>
+                    <li><code>less</code></li>
+                    <li><code>equal</code></li>
+                    </ul>
+                    </li>
+                    <li>binary<ul>
+                    <li><code>and</code><ul>
+                    <li>anything below (exclusive) 1 counts as 0, anything above 1 (inclusive) counts as 1</li>
+                    </ul>
+                    </li>
+                    <li><code>or</code></li>
+                    <li><code>not</code></li>
+                    <li><code>xor</code></li>
+                    <li><code>nand</code></li>
+                    </ul>
+                    </li>
+                    <li>constants<ul>
+                    <li><code>e</code></li>
+                    <li><code>pi</code></li>
+                    <li><code>tau</code></li>
+                    <li><code>samplerate</code></li>
+                    <li><code>permeability_of_free_space</code></li>
+                    <li><code>electron_charge</code></li>
+                    <li><code>avogadros_number</code></li>
+                    <li><code>u32_limit</code></li>
+                    <li><code>unix_timestamp</code><ul>
+                    <li>technically not constant; updates in realtime</li>
+                    </ul>
+                    </li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>imports</p>
+                    <ul>
+                    <li><code>audio</code>
+                      - </li>
+                    <li><code>macro</code><ul>
+                    <li>toml file containing a module macro</li>
+                    </ul>
+                    </li>
+                    <li><code>audio_folder</code><ul>
+                    <li>works in parallel with folder_rep, which should be placed below the render module if you want to process a bunch of audio files in bulk</li>
+                    </ul>
+                    </li>
+                    <li><code>audio_database</code><ul>
+                    <li>similar to audio folder, except it works on all the audio files in an entire folder heiarchy instead of just a single folder</li>
+                    </ul>
+                    </li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <ul>
+                    <li>conversions <ul>
+                    <li><code>samps_to_ms</code></li>
+                    <li><code>samps_to_hz</code><ul>
+                    <li>converts period (samps) to frequency (hz)</li>
+                    </ul>
+                    </li>
+                    <li><code>ms_to_samps</code></li>
+                    <li><code>ms_to_hz</code></li>
+                    <li><code>hz_to_samps</code></li>
+                    <li><code>hz_to_ms</code></li>
+                    <li><code>hz_to_midi</code></li>
+                    <li><code>hz_to_octave</code><ul>
+                    <li>converts hz to the octave number (float). log scale basically, but just with fine-tunes ranges and tolerances. </li>
+                    </ul>
+                    </li>
+                    <li><code>midi_to_hz</code></li>
+                    <li><code>midi_to_octave</code></li>
+                    <li><code>db_to_amp</code></li>
+                    <li><code>amp_to_db</code></li>
+                    <li><code>unipolar_to_bipolar</code><ul>
+                    <li>converts signals whose range is between 0 and 1 to signals whose range is between -1 and 1</li>
+                    </ul>
+                    </li>
+                    <li><code>bipolar_to_unipolar</code></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <ul>
+                    <li><p>control</p>
+                    <ul>
+                    <li><code>lin_decay</code><ul>
+                    <li>linear decay envelope. output value starts at 1.0, linearly decays to 0 over teh specified suration, then stays there for the remaining whatever. </li>
+                    <li>2 signal inputs; one being the length of decay in ms, the other being a trigger</li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    <li><code>trigger_start</code><ul>
+                    <li>generates a single sample impulse at when teh index of the requested sample is 0. otherwise output 1. </li>
+                    </ul>
+                    </li>
+                    <li><code>trigger_thresh</code><ul>
+                    <li>generate a single sample inpulse whenever the input signal exceeds some threshold signal (inclusive), but doesn&#39;t sustain that trigger for however long the input is above the thresh. </li>
+                    </ul>
+                    </li>
+                    <li><code>sah</code><ul>
+                    <li>upon receiving a trigger signal, the module will sample and hold the other input signal</li>
+                    </ul>
+                    </li>
+                    <li><code>adsr</code><ul>
+                    <li>simple linear aadsr that takes a trigger input. attack decay sustain and release parameters are signals. time in ms</li>
+                    </ul>
+                    </li>
+                    <li><code>adsr_static</code><ul>
+                    <li>same as adsr except the parameters (except for the trigger input) are all static. </li>
+                    </ul>
+                    </li>
+                    <li><code>ramp</code><ul>
+                    <li>gradually interpolates between 0.0 and 1.0 over the specified duration</li>
+                    </ul>
+                    </li>
+                    <li><code>param_rand</code><ul>
+                    <li>returns the same random for each requested sample, but different random values for each rep it may be contained within </li>
+                    </ul>
+                    </li>
+                    <li><code>function</code><ul>
+                    <li>parameter with no signal inputs; only vectors containing points to be interpolated between. vectors because the number of points is unlimited. this would only really work with a UI that&#39;s able to draw points in an editor. </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    <li><p>other</p>
+                    <ul>
+                    <li><code>sum_n</code><ul>
+                    <li>1 input, being a vector of names of input modules. </li>
+                    <li>for each requested sample, sum_n will itterate through the vector of input modules, append the received sample from each input module to a vector, sum the vals of each sample in said vector, divide that by the length of the vector, and output a new sample value</li>
+                    </ul>
+                    </li>
+                    <li><code>sum_rep</code><ul>
+                    <li>similar to sum_n, only instead of taking from multiple modules it takes from one and just does it a bunch of times. </li>
+                    </ul>
+                    </li>
+                    <li><code>split</code><ul>
+                    <li>takes signal from a different input depending on whatever integer is closest to the primary input signal. </li>
+                    </ul>
+                    </li>
+                    <li><code>monitor</code><ul>
+                    <li>prints the sample value to the console each time a sample passes through it</li>
+                    <li></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </li>
+                    </ul>
+        </div>
+        <!-- yoinked from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible -->
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
+            }
+            </script>
     </body>
 </html>
