@@ -100,6 +100,10 @@
             color:rgb(255, 208, 0)
             
         }
+        .media {
+            background-color: rgba(81, 222, 0, 0.150);
+
+        }
         .tooltip {
             position: relative;
             display: inline-block;
@@ -127,26 +131,28 @@
             transform: rotate(0deg);
             font-family: "ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3"; 
             animation-name: rotation;
-            animation-duration: 60s;
-            animation-timing-function: linear;
+            animation-duration: 30s;
+            animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
 
         }
         .derotate{
             transform: rotate(0deg);
             animation-name: derotation;
-            animation-duration: 60s;
-            animation-timing-function: linear;
+            animation-duration: 30.5s;
+            animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
         }
 
         @keyframes rotation {
-            0% {transform: rotate(0deg);}
-            100%{transform: rotate(360deg);}
+            0% {transform: rotate(-20deg);}
+            50% {transform: rotate(20deg)}
+            100%{transform: rotate(-20deg);}
         }
         @keyframes derotation {
-            0% {transform: rotate(0deg);}
-            100%{transform: rotate(-360deg);}
+            0% {transform: rotate(20deg);}
+            50% {transform: rotate(-20deg)}
+            100%{transform: rotate(20deg);}
         }
         /* @keyframes other {
             0% {height: 180px}
@@ -178,6 +184,7 @@
                 <div class="mainCol musicInner"  style="color: rgba(255, 145, 0, 0.74); border-radius: 5%; background-image: linear-gradient(10deg, rgba(76, 85, 37, 0.89) 25%, rgb(182, 0, 152) 80%, rgba(255, 255, 0, 0) 45%);">
                     <h1 >music</h1>
                     <a class="date">m/d/y</a> - Release Type - <a href="">Release Title</a><br><hr>
+                    <a class="date">1/15/25</a> - <a href="music/dipePreme.html">dipe preme</a><br>
                     <a class="date">1/9/25</a> - <a href="music/TECH201Etude.html">TECH 201 Etude</a><br>
                     <a class="date">12/7/24</a> - EP - <a href="music/textureEP.html">Texture</a><br>
                     <a class="date">11/9/24</a> - <a href="music/inventionForTub.html">invention for Tub</a><br>
@@ -217,25 +224,29 @@
             <div style="float: left;">
                 <div style="background-image: url(other/media/gradient.png); padding: 15px; color: rgb(255, 225, 185);">
                     <h2 style="color:rgb(0, 0, 0)">contraptions</h2>
-                    <a href="contraptions/buffer-gen.html">buffer-gen</a>(WIP, devlog-ish)<br>
-                    <a href="contraptions/rick.html">rick</a><br>
-                    <a href="contraptions/noiseInjection.html">noise injection</a><br>
-                    <a href="contraptions/filterCrazy.html">filter crazy</a><br>
-                    paid - <a href="contraptions/modalSynth.html">modal synth</a> <marquee loop="0" width="100px" style="position:absolute;"><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
-                    paid - <a href="contraptions/combobulatorModels.html">combobulator artist brains</a><br>
-                    <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
-                    <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
-                    <a href="contraptions/badReverb.html">bad reverb</a><br>
-                    <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
+                    medium - <a href="">link</a> - (other info)<br>
+                    <hr>
+                    melda - <a href="contraptions/meldaAlgos.html">melda algorithms</a><br>
+                    standalone - <a href="contraptions/buffer-gen.html">buffer-gen</a> (WIP)<br>
+                    m4l - <a href="contraptions/rick.html">rick</a><br>
+                    m4l - <a href="contraptions/noiseInjection.html">noise injection</a><br>
+                    m4l - <a href="contraptions/filterCrazy.html">filter crazy</a><br>
+                    m4l - <a href="contraptions/modalSynth.html">modal synth</a> ($20)<marquee loop="0" width="100px" style="position:absolute;"><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
+                    add-on - <a href="contraptions/combobulatorModels.html">combobulator brains</a> ($33)<br>
+                    m4l - <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
+                    m4l - <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
+                    m4l - <a href="contraptions/badReverb.html">bad reverb</a><br>
+                    m4l - <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
 
                     
                 </div>  <br><br>
                 <div class="rotate" style="background-image:  url(other/media/liveTexture.png); padding-left: 20px; padding-top: 10px; margin-left: 10px;">
                     <div class="derotate" >
                         <h2>video</h2><p>under construction</p>
-                        > <a href="video/livestreams.html">livestreams list</a> (93) <br>
+                        > <a href="video/livestreams.html">livestreams list</a> (102) <br>
                         > <a href="video/tutorials.html">tutorials</a> (14) <br>
-                        > <a href="">misc audio</a><br><br>
+                        > <a href="video/miscAudio.html">misc audio</a><br>
+                        > <a href="video/oldGamingStuff.html">old gaming stuff</a><br><br>
                     </div>
                 </div>
                 
@@ -251,7 +262,7 @@
                     </div>
                     <h2 style="color: chartreuse;">Other</h2>
                         <a href="other/musicList.html">music list</a> <br>
-                        <a href="other/wips.html">wips and unreleased music</a><br>
+                        <a href="other/wips.html">unreleased music</a><br>
                         <a href="other/pageTest.html" target="_blank">test page</a><br>
                         <a href="other/coolPeople.html">cool people</a><br>
                         <a href="other/pressKit.html">press kit</a><br>
@@ -259,7 +270,7 @@
                     
                 </div>
                 
-                    <div style="margin-left: 20%; background-color: rgba(137, 206, 97, 0.664); width: 20%; height:2in; transform: translateY(-10px);"></div>
+                    <!-- <div style="margin-left: 20%; background-color: rgba(137, 206, 97, 0.664); width: 20%; height:2in; transform: translateY(-10px);"></div>  --> <!--vertical recyangular thing-->
                     
             </div>
             
@@ -274,24 +285,28 @@
                     <a href="https://www.audioalien.app/artist/1448822/popbot" target="_blank">AudioAleien</a><br>
                     <br>
                 </div>
-                <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -20px; transform: rotateZ(2deg); "></div>
-                <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -25px; transform: rotateZ(356deg); "></div>
-                <div class="ic" style="position: absolute; background-color: rgba(0, 222, 130, 0.295); width: 125; height: 50px; margin-left: 20px; margin-top: 120px; border-radius: 15%; transform: rotateZ(60deg); ">m</div>
 
-                <h3>media</h3>
-                <a href="https://twitter.com/PopbotMusic" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Twitter</a> (inactive) <br>
-                <a href="https://bsky.app/profile/popbot.work" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Bluesky</a><br>
-                <a href="https://www.instagram.com/popbot_/?hl=af" target="_blank">Instagram</a> (inactive)<br>
-                <a href="https://www.youtube.com/channel/UCckNFTtfD7FKCqbTE5UBVPw" target="_blank" style="color: blue;">Youtube Channel</a><br>
-                <a href="https://github.com/Popbot11" target="_blank">github</a> <div class="tooltip">hover for tooltip<span class="tooltiptext">my github is pretty innactive; the only things on there are the code for this website (it's public since i'm using github pages to host it) and maybe some other projects. most of my stuff is in a private repository. i am still a little baby when it comes to programming </span></div>
-                
-                <div class="ic" style="position: absolute; width: 200px; height: 100px; margin-left: -100px; background-image: linear-gradient(red 0%, rgba(255, 0, 123, 0.276) 10%, rgba(0, 0, 0, 0) 100%);"></div>
+                <div class="media">
+                    <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -20px; transform: rotateZ(2deg); "></div>
+                    <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -25px; transform: rotateZ(356deg); "></div>
+                    <!-- <div class="ic" style="position: absolute; background-color: rgba(0, 222, 130, 0.295); width: 125; height: 50px; margin-left: 20px; margin-top: 120px; border-radius: 15%; transform: rotateZ(60deg); ">m</div> -->
+
+                    <h3>media</h3>
+                    <a href="https://twitter.com/PopbotMusic" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Twitter</a> (inactive) <br>
+                    <a href="https://bsky.app/profile/popbot.work" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Bluesky</a><br>
+                    <a href="https://www.instagram.com/popbot_/?hl=af" target="_blank">Instagram</a><br>
+                    <a href="https://www.youtube.com/channel/UCckNFTtfD7FKCqbTE5UBVPw" target="_blank" style="color: blue;">Youtube Channel</a><br>
+                    <a href="https://github.com/Popbot11" target="_blank">github</a> <div class="tooltip">hover for tooltip<span class="tooltiptext">my github is pretty innactive; the only things on there are the code for this website (it's public since i'm using github pages to host it) and maybe some other projects. most of my stuff is in a private repository. i am still a little baby when it comes to programming </span></div>
+                </div>
+                <br><hr>
+                <div class="ic" style="position: absolute; width: 200px; height: 100px;  background-image: linear-gradient(red 0%, rgba(255, 0, 123, 0.276) 10%, rgba(0, 0, 0, 0) 100%);"></div>
                 <h3 style="font-family: 'Courier New', Courier, monospace;">contact</h3>
                 <div class="contact" style="background-image: radial-gradient(rgb(0, 0, 255), rgb(255, 166, 0)); padding-bottom: 40px;">
                     <a href="other/email.html" target="_blank">Email</a><br>
                     <a href="https://discord.gg/RpZ4dt9mUr" target="_blank">Discord Server</a><br>
                     <a href="other/lessons.html">lessons info</a> <img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"><br>
                     <a href="https://earth.google.com/web/@-1.02273465,-119.18109438,-4100.55618263a,1019.21527724d,35y,54.86475516h,0t,0r/data=OgMKATA" target="_blank">1°01'24"S 119°10'51"W</a><br>
+                
                 </div>
             </div>
 

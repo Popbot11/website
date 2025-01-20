@@ -1,0 +1,102 @@
+<html>
+    <head>
+                                        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMF5SZ58X2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZMF5SZ58X2');
+        </script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/lib/codemirror.min.css">
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/addon/runmode/runmode-standalone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.61.0/mode/python/python.min.js"></script>
+        
+        <style>
+            .codebox {
+                background-color: black;
+                margin-left: 100px;
+                margin-right: 100px;
+            }
+            .indent {
+                background-color: black;
+                margin-left: 100px;
+                padding: 2px;
+            }
+            code {
+                font-family: monospace;
+                color: white;
+                background-color: black;
+            }
+
+            table {
+              border-collapse: collapse;
+              
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+              font-weight: normal;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+
+    </head>
+    <body>
+        <a href="../index.html">home</a><br><br>
+        myself and my friends <a href="https://amfivolia.crd.co/" target="_blank">amfi</a> and <a href="https://soundcloud.com/lukasipo"target="_blank">lukas</a> recently (as of 1/20/2025) have been into writing algorithms for MTurboFilter and MTurboReverb. 
+        <br>
+        <p>
+            for those who are unaware, the melda suite of plugins has two plugins, MTurboFilter and MTurboReverb, which allow for the user to write custom filter and reverb algorithms. It's a text-based editor, and you can past user-made algos into it. <br>
+            I'm sort of astonished that this feature isn't talked about more. It's soo cool. Here's some of the algos that I've made.
+        </p>
+        <p>
+            oh also i haven't included the algos that lukas and amfi have made since they didn't explicitly give me permission to do so. This whoel thing is largely a collaborative process between us three, they just tend to be a little more normal about what they want to zshare publically online lol
+        </p>
+        <p style="color: red">A LOT OF THESE TEND TO EXPLODE!!!! MAKE SURE YOU USE A SAFETY LIMITER AND DC FILTER AND ALL THAT</p>
+        <hr>
+
+        <h2>mturboreverb</h2>
+        <!-- <img src="meldaAlgos/verb.png" width="500px"><br> -->
+        <code class="indent">#cnb($1;{$2 * 50})[fh]</code> - #sucks
+        <br><code class="indent">p[#cn($1, $2)[fh; v; #fam]]</code>
+        <br><code class="indent">fdn({$1 * 100})[freqshift;#sat]</code>
+        <br><code class="indent">fdn({$1 * 100})[freqshift({$3 *10}; {$2 * 1000});#sat; #fh]</code>
+        <br><code class="indent">fdn[#[fh;pitch]]</code> - extremely simple tool for messing with tonal and temporal perception
+
+        <br><h2>mturbofilter</h2>
+        <p>python script to generate some kinda goofy modal-like networks</p>
+        <div class="codebox"><pre><code>
+num = int(input("complexity: "))
+skew = float(input("skew: "))
+analog = float(input("analog: "))
+output = "p[l;s["
+for i in range(num):
+    output += "s[lp(f*"+str((i+1)*skew)+";;;"+str(analog)+");hp(f*"+str((i+1)*skew)+";;;"+str(analog)+")];"
+output += "]]"
+print(output)
+        </code></pre></div>
+        <br><code class="indent">p[l;s[s[lp(f*1;;;0.5);hp(f*1;;;0.5)];s[lp(f*2;;;0.5);hp(f*2;;;0.5)];s[lp(f*3;;;0.5);hp(f*3;;;0.5)];s[lp(f*4;;;0.5);hp(f*4;;;0.5)];s[lp(f*5;;;0.5);hp(f*5;;;0.5)];]]</code>
+        <br><code class="indent"></code>
+        <br><code class="indent"></code>
+
+        <br><hr>
+        <p>also heres some simple barebones docs i made for myself to use with mturboreverb since the melda docs are kind of nightmarishly formatted</p>
+        
+        <!--code copied from notion html export-->
+        <p id="d962af63-3a13-4da5-a1a8-243a3dc771db" class=""><strong>containers</strong></p>
+        <table><tbody>
+            <tr><td>s</td><td>Serial</td><td style="width:377px"><code>[submodule1;submodule2;...]</code></td></tr><tr><td>p</td><td>Parallel</td><td id="GX\j" class="" style="width:377px">‘’</td></tr><tr id="7eea3df4-54b8-4eef-bba7-e3f9d3691969"><td id="PcNI" class="">pw</td><td id="QB&gt;W" class="">Parallel Weighted</td><td id="GX\j" class="" style="width:377px"><code>(w1;w2...)[submodule1;submodule2;...]</code></td></tr><tr id="802ae57d-02d3-4e41-8ea2-e2f4c32c0ef2"><td id="PcNI" class="">cn, cnb</td><td id="QB&gt;W" class="">comb w/ nesting</td><td id="GX\j" class="" style="width:377px"><code>(decay;time) [submodule1;submodule2;...]</code></td></tr><tr id="2329f1f6-146f-475d-97b6-5fac25495906"><td id="PcNI" class="">an</td><td id="QB&gt;W" class="">allpass w/ nesting</td><td id="GX\j" class="" style="width:377px"><em><code>(decay;time)</code></em><code> [submodule1;submodule2;...]</code><br/><br/><br/></td></tr><tr id="b5f140b1-141a-4ad4-b90f-349ff381d69b"><td id="PcNI" class="">fdn</td><td id="QB&gt;W" class="">feedback delay network<br/>size controled by complexity if not specified<br/></td><td id="GX\j" class="" style="width:377px"><code>(size) [submodule1;submodule2...submoduleN]</code><br/><br/>for example: <br/><code>fdn[#[fl;fh]]</code> is an fdn of size # where each feedback channel is processed w/ the dampening filters. </td></tr><tr id="92c99e5d-eb0a-4322-bc62-cdcef06c13e5"><td id="PcNI" class=""></td><td id="QB&gt;W" class=""></td><td id="GX\j" class="" style="width:377px"></td></tr></tbody></table><p id="17da6936-1e2f-80b7-80dd-f4e696e58710" class="">
+</p><p id="cf36cdba-ec42-4d94-8a9b-7dc6e5a597e4" class=""><strong>basic processors</strong></p><table id="226edbf8-86c7-4b67-b461-07faeb4747d6" class="simple-table"><tbody><tr id="e4e3ff47-bfcb-4b6f-941d-9e11931b370d"><td id="r~=D" class="">d</td><td id="|lxC" class="">delay. <br/>if time not specified, it’s randomized<br/></td><td id="mp=E" class=""><code>d(t)</code></td></tr><tr id="8db1c759-a05c-4e8f-be2f-96d797252771"><td id="r~=D" class="">c</td><td id="|lxC" class="">comb</td><td id="mp=E" class=""><code>c(decay;time)</code></td></tr><tr id="f019c13f-2205-42f6-9507-e3e482ba5107"><td id="r~=D" class="">cb</td><td id="|lxC" class="">comb, lets input pass as well</td><td id="mp=E" class=""><code>c(decay;time)</code></td></tr><tr id="2848eb89-c707-4eab-b0d5-27996d2a966f"><td id="r~=D" class="">a</td><td id="|lxC" class="">allpass</td><td id="mp=E" class=""><code>c(decay;time)</code></td></tr><tr id="30b95b9c-cd02-4eca-86bd-e17c64a8f5a4"><td id="r~=D" class="">fl</td><td id="|lxC" class="">low shelf controlled by damp low panel</td><td id="mp=E" class=""></td></tr><tr id="7c5f0885-8f4a-4e79-a15f-820e271fcc24"><td id="r~=D" class="">fh</td><td id="|lxC" class=""></td><td id="mp=E" class=""></td></tr><tr id="fdfc10e6-9f94-4cca-95ac-a02a90b96fce"><td id="r~=D" class=""></td><td id="|lxC" class=""></td><td id="mp=E" class=""></td></tr></tbody></table><p id="f4d25b1f-dc92-42e1-b153-083545bbcfce" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span><br><hr><br>
+
+    <img src="meldaAlgos/filter.png" width="49%"><img src="meldaAlgos/verb.png" width="49%">
+    </body>
+</html>
