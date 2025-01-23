@@ -69,26 +69,28 @@
 
         <script>
             class ModuleData {
-                constructor(name, params, accepts_submodules){
-                    this.name = name;
+                constructor(params, accepts_submodules){
+                    
                     this.params = params;
                     this.accepts_submodules = accepts_submodules;
+                    
                 }
             }
 
             var modulecount = 0;
-            var currentModule = "";
+            // var currentModule = "";
 
             //storing info for each module and how that works etc
             const modules = {
-                "nesting_comb": new ModuleData("", ["delay", "feedback"], true),
-                "level": new ModuleData("", ["gain"], false)
+                "base": new ModuleData([], true),
+                "nesting_comb": new ModuleData(["delay", "feedback"], true),
+                "level": new ModuleData(["gain"], false)
             }
 
 
             // specifically info about wwhat modules take what other modules as inputs
             var chain = {
-
+                "base0": ["base", [], 0],
             }
 
             function printChain(){
@@ -143,6 +145,10 @@
                     var parentModule = this.id;
                     var dropdown = document.createElement("div");
                     dropdown.style="position:absolute;left:"+(event.pageX-15)+"px;"
+
+                    var fuck = this.getAttribute('data-num')
+                    // console.log("dropdown num: "+fuck);
+
                     for (var module in modules) {
                         // console.log(module);
                         var item = document.createElement("button")
@@ -151,16 +157,29 @@
                         item.id = module;
                         
                         item.onclick = function(){
-                            console.log(parentModule);
-                            chain[parentModule] = event.target.id;
-                            printChain();
+                            // console.log(parentModule + ", " + fuck+ ", "+event.target.id);
+                            chain[parentModule][1].push(event.target.id);
+
+                            modulecount += 1;
+
+                            chain[event.target.id+modulecount] = [event.target.id, [], modulecount];
+
+                            var canvas = document.getElementById("canvas")
+                            var parent = canvas.parentNode;
+                            parent.removeChild(canvas);
+                            parent.appendChild(
+                                Object.assign(document.createElement("canvas-"), {
+                                    id: "canvas", 
+                                })
+                            )
+
                         }
 
                         dropdown.appendChild(item);
                         dropdown.appendChild(document.createElement("br"));
                         
                     }
-                    console.log("id: "+this.id);
+                    // console.log("id: "+this.id);
                     this.appendChild(dropdown);
                 }
                 connectedCallback() {
@@ -180,13 +199,18 @@
                 render() {
                     var button = document.createElement("button");
                     button.innerText = "add submodule";
-
-                    var dropdown = Object.assign(document.createElement("module-dropdown"), {id: this.id});
                     
+
+                    // console.log("addbutton num: "+this.getAttribute('data-num'));
+                    
+                    var dropdown = Object.assign(document.createElement("module-dropdown"), {
+                        id: this.id, 
+                    });
+                    dropdown.setAttribute('data-num', this.getAttribute('data-num'))
 
                     this.onmouseover = function(){this.appendChild(dropdown)};
                     this.onmouseleave = function(){this.removeChild(dropdown)};
-                    button.onclick = function(){console.log("clicked!!");};
+                    // button.onclick = function(){console.log("clicked!!");};
 
                     this.appendChild(button);
                 }
@@ -205,6 +229,8 @@
                     super();
                 }
                 render() {
+                    var contents = document.createElement("pre");
+                    
                     
                 }
                 connectedCallback() {
@@ -222,32 +248,47 @@
                     super();
                 }
                 render() {
-                    console.log("rendering: "+this.id+" module");
-
+                    // console.log(this.id)
+                    this.setAttribute('data-num', chain[this.id][2]);
+                    console.log(chain[this.id][2]+", "+this.id)
+                    var selfName = this.id;
+                    
+                    // console.log("number: "+this.getAttribute('data-num'));
+                    // console.log("rendering: "+selfName);
+                    
                     var contents = document.createElement("div");
                     contents.className = "moduleMain";
-
+                    
                     var divider = document.createElement("span");
                     divider.innerText = " | "
-
+                    
                     var title = document.createElement("span");
-                    title.innerText = this.id + " | "
+                    title.innerText = selfName + " | "
                     contents.appendChild(title);
-
-                    if (modules[this.id].accepts_submodules){
-                        var addButton = Object.assign(document.createElement("add-button"), {id: this.id});
-                        // addButton.id = this.id;
+                    
+                    if (modules[chain[this.id][0]].accepts_submodules){
+                        var addButton = Object.assign(document.createElement("add-button"), {
+                            id: this.id, 
+                        }); 
+                        addButton.setAttribute('data-num', this.getAttribute('data-num'))
                         contents.appendChild(addButton);
+
+                        var submodules = document.createElement("span")
+                        // submodules.innerHTML = "balls"+modulecount;
+                        contents.appendChild(submodules);
+
                         contents.appendChild(divider);
                     }
                     
-
-                    for (const value of modules[this.id].params){
-                        var paramUI = (document.createElement("param-"))
+                    for (const value of modules[chain[this.id][0]].params){
+                        var paramUI = (Object.assign(document.createElement("param-"), {
+                            id: this.id, 
+                            ['data-num']: this.num
+                        }))
                         // console.log(value)
                         paramUI.setAttribute("name", value);
                         paramUI.setAttribute("info", "null");
-                        console.log(paramUI);
+                        // console.log(paramUI);
                         contents.appendChild(paramUI);
                     }
 
@@ -268,7 +309,12 @@
                     super();
                 }
                 render() {
-                    
+                    for (let module in chain){
+                        // console.log("thingy: "+module);
+                        var ui = Object.assign(document.createElement("module-main"), {id: module});
+                        // ui.id = module.name;
+                        this.appendChild(ui);
+                    }
                 }
                 connectedCallback() {
                     if (!this.rendered) {
@@ -281,7 +327,7 @@
 
             var output = "";
 
-                    
+           
         </script>
     </head>
     <body>
@@ -309,7 +355,10 @@
         </div> -->
 
         <hr>
-        <module-main id="nesting_comb"></module-main>
+        <!-- <module-main id="base"></module-main> -->
+        <div>
+         <canvas- id="canvas"></canvas->
+        </div>
 
         <hr size="5px" color="black">
         <span>Output:</span><br>
