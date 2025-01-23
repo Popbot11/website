@@ -20,6 +20,15 @@
                 background-color: rgba(0, 0, 0, 0.103);
                 width:fit-content;
             }
+            .moduleMini{
+                /* padding: 5px; */
+                /* border: 2px; */
+                margin: 2px;
+                border-style:dotted;
+                border-color: rgb(143, 143, 143);
+                background-color: rgba(0, 0, 0, 0.074);
+                width:fit-content;
+            }
             .tooltip{
                 position: absolute;
                 background-color: aqua;
@@ -27,6 +36,9 @@
             input {
                 min-width: 10px;
                 width: 6ch;
+            }
+            button{
+                border-radius: 0%;
             }
             .hide{
                 visibility:visible;
@@ -68,6 +80,8 @@
 
 
         <script>
+            
+
             class ModuleData {
                 constructor(params, accepts_submodules){
                     
@@ -83,8 +97,13 @@
             //storing info for each module and how that works etc
             const modules = {
                 "base": new ModuleData([], true),
+                "level": new ModuleData(["gain"], false),
+                "level_sig": new ModuleData([], true),
                 "nesting_comb": new ModuleData(["delay", "feedback"], true),
-                "level": new ModuleData(["gain"], false)
+                "nesting_allpass": new ModuleData(["delay", "feedback", "q"], true),
+                "fdn": new ModuleData(["size"], true),
+                "parallel": new ModuleData([], true),
+
             }
 
 
@@ -144,7 +163,8 @@
                 render() {
                     var parentModule = this.id;
                     var dropdown = document.createElement("div");
-                    dropdown.style="position:absolute;left:"+(event.pageX-15)+"px;"
+                    dropdown.style="position:absolute;left:"+this.getAttribute('data-pos-x')+"px;"
+                    console.log(this.getAttribute('data-pos-x'))
 
                     var fuck = this.getAttribute('data-num')
                     // console.log("dropdown num: "+fuck);
@@ -158,10 +178,10 @@
                         
                         item.onclick = function(){
                             // console.log(parentModule + ", " + fuck+ ", "+event.target.id);
-                            chain[parentModule][1].push(event.target.id);
-
+                            
                             modulecount += 1;
-
+                            
+                            chain[parentModule][1].push(event.target.id+modulecount);
                             chain[event.target.id+modulecount] = [event.target.id, [], modulecount];
 
                             var canvas = document.getElementById("canvas")
@@ -200,16 +220,32 @@
                     var button = document.createElement("button");
                     button.innerText = "add submodule";
                     
-
-                    // console.log("addbutton num: "+this.getAttribute('data-num'));
                     
-                    var dropdown = Object.assign(document.createElement("module-dropdown"), {
-                        id: this.id, 
-                    });
-                    dropdown.setAttribute('data-num', this.getAttribute('data-num'))
+                    // console.log("addbutton num: "+this.getAttribute('data-num'));
+                    // var dropdown = document.createElement("a");
+                    var dropdown = Object.assign(document.createElement("module-dropdown"), {id: this.id});
+                    dropdown.setAttribute('data-num', this.getAttribute('data-num'));
 
-                    this.onmouseover = function(){this.appendChild(dropdown)};
-                    this.onmouseleave = function(){this.removeChild(dropdown)};
+                    // this.onmouseenter = function(){
+                        
+                    // }
+                    
+                    
+                    this.onmouseover = function(){
+                        
+                        
+                        // console.log(this.getAttribute('data-pos-x'));
+                        dropdown.setAttribute('data-pos-x', event.clientX-15);
+                        this.appendChild(dropdown)
+                    };
+                    
+
+                    // this.onmouseover = function(){
+                    //     this.appendChild(dropdown)
+                    // };
+                    this.onmouseleave = function(){
+                        this.removeChild(dropdown)
+                    };
                     // button.onclick = function(){console.log("clicked!!");};
 
                     this.appendChild(button);
@@ -229,9 +265,22 @@
                     super();
                 }
                 render() {
-                    var contents = document.createElement("pre");
+                    var contents = document.createElement("span");
+                    // console.log(this.getAttribute('data-sub-id'));
+                    contents.innerText = " " +this.getAttribute('data-sub-id')+" ";
+                    contents.className  = "moduleMini";
+
+                    var deleteButton = document.createElement("button");
+                    deleteButton.innerText = "x"
+                    deleteButton.style="padding: 2px;"
                     
+                    deleteButton.onclick = function(){
+                        console.log("penis fart")
+                    }
+
+                    contents.appendChild(deleteButton);
                     
+                    this.appendChild(contents);
                 }
                 connectedCallback() {
                     if (!this.rendered) {
@@ -250,7 +299,7 @@
                 render() {
                     // console.log(this.id)
                     this.setAttribute('data-num', chain[this.id][2]);
-                    console.log(chain[this.id][2]+", "+this.id)
+                    console.log(chain[this.id][2]+", "+this.id);
                     var selfName = this.id;
                     
                     // console.log("number: "+this.getAttribute('data-num'));
@@ -260,10 +309,10 @@
                     contents.className = "moduleMain";
                     
                     var divider = document.createElement("span");
-                    divider.innerText = " | "
+                    divider.innerText = " | ";
                     
                     var title = document.createElement("span");
-                    title.innerText = selfName + " | "
+                    title.innerText = selfName + " | ";
                     contents.appendChild(title);
                     
                     if (modules[chain[this.id][0]].accepts_submodules){
@@ -273,9 +322,19 @@
                         addButton.setAttribute('data-num', this.getAttribute('data-num'))
                         contents.appendChild(addButton);
 
-                        var submodules = document.createElement("span")
+                        for (var sub of chain[this.id][1]){
+                            var submodule = Object.assign(document.createElement("module-mini"), {
+                                id: this.id,
+                            });
+                            submodule.setAttribute('data-sub-id', sub);
+                            // submodule.setAttribute('data-index', sub);
+
+                            contents.appendChild(submodule);
+                        }
+                        
+
+
                         // submodules.innerHTML = "balls"+modulecount;
-                        contents.appendChild(submodules);
 
                         contents.appendChild(divider);
                     }
