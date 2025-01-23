@@ -1,0 +1,282 @@
+<html>
+    <head>
+                                        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZMF5SZ58X2"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZMF5SZ58X2');
+        </script>
+
+        <style>
+            .moduleMain{
+                padding: 5px;
+                border: 2px;
+                margin: 2px;
+                border-style: solid;
+                border-color: rgb(94, 94, 94);
+                background-color: rgba(0, 0, 0, 0.103);
+                width:fit-content;
+            }
+            .tooltip{
+                position: absolute;
+                background-color: aqua;
+            }
+            input {
+                min-width: 10px;
+                width: 6ch;
+            }
+            .hide{
+                visibility:visible;
+            }
+        </style>
+
+        <!--GENERAL PURPOSE STUFF-->
+        <script>
+            class ExpandBox extends HTMLElement {
+                constructor(){
+                    super();
+                }
+
+                
+
+                render() {
+
+                    var target = document.getElementById(this.getAttribute("targetID"));
+                    console.log(this.getAttribute("targetID"))
+                    console.log(document.getElementById("nuts"))
+                    
+                    target.style = "visibility: hidden;";
+
+                    // this.hidden = true;
+                    var button = document.createElement("button");
+                    button.innerText = this.getAttribute("hiddenText");
+                    button.onclick = function(){
+                        if (target.hidden){
+                            target.style = "visibility: visible;";
+                        } else{
+                            target.style = "visibility: hidden;";
+                        }
+                    };
+
+                    // button.show = false;
+                    this.appendChild(button);
+
+
+                    
+                    // console.log("yikes!");
+                    // this.innerText = "srukdgrbskjhb";
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("expand-box", ExpandBox);
+        </script>
+        <script>
+            class ModuleData {
+                constructor(name, params, accepts_submodules){
+                    this.name = name;
+                    this.params = params;
+                    this.accepts_submodules = accepts_submodules;
+                }
+            }
+
+            //storing info for each module and how that works etc
+            var modules = {
+                "nesting_comb": new ModuleData("nesting_comb", ["delay", "feedback"], true),
+                "level": new ModuleData("level", ["gain"], false)
+            }
+
+            // specifically info about wwhat modules take what other modules as inputs
+            var chain = {
+
+            }
+            //custom UI element for a module parameter
+            class Parameter extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                render() {
+                    var name = this.getAttribute("name");
+                    var info = this.getAttribute("info");
+
+                    var numbox = document.createElement("input");
+                    numbox.type="number";
+                    numbox.name=name;
+                    numbox.onkeypress = function() {numbox.style.width = numbox.value.length + 5 + 'ch'};
+
+                    var tooltip = document.createElement("span");
+                    tooltip.class = "tooltip"
+                    tooltip.innerText = name + "\n" + info
+                    tooltip.style="position:absolute;color:white;background-color:black;transform: translateY(20px);"
+                
+                    this.appendChild(numbox);
+                    
+                    this.onmouseover = function(){this.appendChild(tooltip)};
+                    this.onmouseleave = function(){this.removeChild(tooltip)};
+
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("param-", Parameter);
+
+            class ModuleDropdown extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                render() {
+                    var dropdown = document.createElement("div");
+                    dropdown.style="position:absolute;left:"+event.pageX+"px;"
+                    for (let module in modules) {
+                        console.log(module);
+                        let item = document.createElement("button")
+                        item.style = "text-color: white;"
+                        item.innerText = module;
+
+                        // item.onclick = function(){chain[module] = }
+
+                        dropdown.appendChild(item);
+                        dropdown.appendChild(document.createElement("br"));
+                    }
+
+                    this.appendChild(dropdown);
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("module-dropdown", ModuleDropdown);
+            //custom UI element for the button to add a new module
+            class AddButton extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                    
+                
+                
+                render() {
+                    var button = document.createElement("button");
+                    button.innerText = "add submodule";
+
+                    var dropdown = document.createElement("module-dropdown");
+
+
+                    this.onmouseover = function(){this.appendChild(dropdown)};
+                    this.onmouseleave = function(){this.removeChild(dropdown)};
+                    button.onclick = function(){console.log("clicked!!");};
+
+                    this.appendChild(button);
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("add-button", AddButton);
+
+            //custom UI element for the mini module thats added after you add a new module
+            class ModuleMini extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                render() {
+                    
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("module-mini", ModuleMini);
+
+            //primary ui for singular module
+            class ModuleMain extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                render() {
+                    
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("module-main", ModuleMain);
+
+            //ui for all modules in a connected list
+            class Canvas extends HTMLElement {
+                constructor(){
+                    super();
+                }
+                render() {
+                    
+                }
+                connectedCallback() {
+                    if (!this.rendered) {
+                        this.render();
+                        this.rendered = true;
+                    }   
+                }
+            }
+            customElements.define("canvas-", Canvas);
+
+            var output = "";
+            // var canvas = document.createElement("div");
+
+            
+               
+        </script>
+    </head>
+    <body>
+        <a href="../index.html">home</a><br><br>
+        <p>
+            a <b>WIP</b> experiment to make a general-purpose editor for text-based modular software. The two things I woudl immediately be able to use this for are my own project, buffer-gen, and the melda algorithms. I'm sure there's other things, though. ill keep this updated with a changelog maybe? idk. 
+        </p>
+
+        <expand-box hiddenText="show changelog" shownText="hide changelog" targetID="changelog"></expand-box>
+        <p id="changelog">changelog text (currently broken)</p>
+        
+        <hr size="5px" color="black">
+        <span>Editor</span><br><br>
+        <!-- ------------------ -->
+         
+        <div class="moduleMain" id="nuts">
+            <!-- <pre> -->
+                nesting comb |
+                <add-button></add-button> | <!--placeholder for thing that draws connections to other modules-->
+
+                <param- info="amt between 0 and 1", name="feedback" ></param->
+                <param- info="time in ms", name="delay" ></param->
+
+            <!-- </pre> -->
+        </div>
+
+        <hr size="5px" color="black">
+        <span>Output:</span><br>
+
+
+        <br>
+        
+    </body>
+</html>
