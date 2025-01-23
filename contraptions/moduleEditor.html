@@ -112,6 +112,16 @@
                 "base0": ["base", [], 0],
             }
 
+            function updateUI(){
+                var canvas = document.getElementById("canvas")
+                    var parent = canvas.parentNode;
+                    parent.removeChild(canvas);
+                    parent.appendChild(
+                        Object.assign(document.createElement("canvas-"), {
+                            id: "canvas", 
+                        })
+                    )
+            }
             function printChain(){
                 console.log(chain);
             }
@@ -184,14 +194,7 @@
                             chain[parentModule][1].push(event.target.id+modulecount);
                             chain[event.target.id+modulecount] = [event.target.id, [], modulecount];
 
-                            var canvas = document.getElementById("canvas")
-                            var parent = canvas.parentNode;
-                            parent.removeChild(canvas);
-                            parent.appendChild(
-                                Object.assign(document.createElement("canvas-"), {
-                                    id: "canvas", 
-                                })
-                            )
+                            updateUI();
 
                         }
 
@@ -210,6 +213,7 @@
                 }
             }
             customElements.define("module-dropdown", ModuleDropdown);
+
             //custom UI element for the button to add a new module
             class AddButton extends HTMLElement {
                 constructor(){
@@ -220,33 +224,17 @@
                     var button = document.createElement("button");
                     button.innerText = "add submodule";
                     
-                    
-                    // console.log("addbutton num: "+this.getAttribute('data-num'));
-                    // var dropdown = document.createElement("a");
                     var dropdown = Object.assign(document.createElement("module-dropdown"), {id: this.id});
                     dropdown.setAttribute('data-num', this.getAttribute('data-num'));
 
-                    // this.onmouseenter = function(){
-                        
-                    // }
-                    
-                    
                     this.onmouseover = function(){
-                        
-                        
-                        // console.log(this.getAttribute('data-pos-x'));
                         dropdown.setAttribute('data-pos-x', event.clientX-15);
                         this.appendChild(dropdown)
                     };
-                    
 
-                    // this.onmouseover = function(){
-                    //     this.appendChild(dropdown)
-                    // };
                     this.onmouseleave = function(){
                         this.removeChild(dropdown)
                     };
-                    // button.onclick = function(){console.log("clicked!!");};
 
                     this.appendChild(button);
                 }
@@ -267,7 +255,11 @@
                 render() {
                     var contents = document.createElement("span");
                     // console.log(this.getAttribute('data-sub-id'));
-                    contents.innerText = " " +this.getAttribute('data-sub-id')+" ";
+                    var submoduleName = this.getAttribute('data-sub-id');
+                    var submoduleIndex = this.getAttribute('data-index');
+                    var supermoduleName = this.getAttribute("id")
+
+                    contents.innerText = " " +submoduleName+" ";
                     contents.className  = "moduleMini";
 
                     var deleteButton = document.createElement("button");
@@ -275,8 +267,17 @@
                     deleteButton.style="padding: 2px;"
                     
                     deleteButton.onclick = function(){
-                        console.log("penis fart")
-                    }
+                        console.log("removing: "+submoduleName+", "+submoduleIndex+" from "+supermoduleName);
+                        // printChain();
+                        delete chain[submoduleName];
+                        console.log("hhh  "+chain[supermoduleName][1])
+                        delete chain[supermoduleName][1][submoduleIndex];
+                        chain[supermoduleName][1].length -= 1;
+                        console.log("jjj  "+chain[supermoduleName][1])
+
+                        // printChain();
+                        updateUI();
+                    }   
 
                     contents.appendChild(deleteButton);
                     
@@ -315,30 +316,32 @@
                     title.innerText = selfName + " | ";
                     contents.appendChild(title);
                     
+                    //render add button and mini modules
                     if (modules[chain[this.id][0]].accepts_submodules){
+                       
+                        //add button
                         var addButton = Object.assign(document.createElement("add-button"), {
                             id: this.id, 
                         }); 
                         addButton.setAttribute('data-num', this.getAttribute('data-num'))
                         contents.appendChild(addButton);
 
-                        for (var sub of chain[this.id][1]){
+                        // mini modules
+                        var i = 0;
+                        for (var sub of chain[selfName][1]){
                             var submodule = Object.assign(document.createElement("module-mini"), {
                                 id: this.id,
                             });
                             submodule.setAttribute('data-sub-id', sub);
-                            // submodule.setAttribute('data-index', sub);
+                            submodule.setAttribute('data-index', i);
 
                             contents.appendChild(submodule);
+                            i += 1;
                         }
-                        
-
-
-                        // submodules.innerHTML = "balls"+modulecount;
-
                         contents.appendChild(divider);
                     }
-                    
+
+                    // render parameters 
                     for (const value of modules[chain[this.id][0]].params){
                         var paramUI = (Object.assign(document.createElement("param-"), {
                             id: this.id, 
