@@ -33,51 +33,40 @@
             }
         </style>
 
-        <!--GENERAL PURPOSE STUFF-->
+        <!--BROKEN-->
         <script>
             class ExpandBox extends HTMLElement {
                 constructor(){
                     super();
                 }
 
-                
-
-                render() {
+            
+                connectedCallback() {
+                    var visible = false;
 
                     var target = document.getElementById(this.getAttribute("targetID"));
                     console.log(this.getAttribute("targetID"))
-                    console.log(document.getElementById("nuts"))
                     
-                    target.style = "visibility: hidden;";
+                    target.hidden = !visible;
 
                     // this.hidden = true;
                     var button = document.createElement("button");
                     button.innerText = this.getAttribute("hiddenText");
                     button.onclick = function(){
-                        if (target.hidden){
-                            target.style = "visibility: visible;";
-                        } else{
-                            target.style = "visibility: hidden;";
-                        }
+                        var target = document.getElementById(this.getAttribute("targetID"));
+                        visible = !visible;
+                        target.hidden = visible;
                     };
 
                     // button.show = false;
                     this.appendChild(button);
 
-
-                    
-                    // console.log("yikes!");
-                    // this.innerText = "srukdgrbskjhb";
-                }
-                connectedCallback() {
-                    if (!this.rendered) {
-                        this.render();
-                        this.rendered = true;
-                    }   
                 }
             }
             customElements.define("expand-box", ExpandBox);
         </script>
+
+
         <script>
             class ModuleData {
                 constructor(name, params, accepts_submodules){
@@ -87,16 +76,25 @@
                 }
             }
 
+            var modulecount = 0;
+            var currentModule = "";
+
             //storing info for each module and how that works etc
-            var modules = {
-                "nesting_comb": new ModuleData("nesting_comb", ["delay", "feedback"], true),
-                "level": new ModuleData("level", ["gain"], false)
+            const modules = {
+                "nesting_comb": new ModuleData("", ["delay", "feedback"], true),
+                "level": new ModuleData("", ["gain"], false)
             }
+
 
             // specifically info about wwhat modules take what other modules as inputs
             var chain = {
 
             }
+
+            function printChain(){
+                console.log(chain);
+            }
+
             //custom UI element for a module parameter
             class Parameter extends HTMLElement {
                 constructor(){
@@ -113,12 +111,18 @@
 
                     var tooltip = document.createElement("span");
                     tooltip.class = "tooltip"
-                    tooltip.innerText = name + "\n" + info
+                    tooltip.innerText = name;
+                    if (info != "null"){
+                        tooltip.innerText += "\n" + info;
+                    }
                     tooltip.style="position:absolute;color:white;background-color:black;transform: translateY(20px);"
                 
                     this.appendChild(numbox);
                     
-                    this.onmouseover = function(){this.appendChild(tooltip)};
+                    this.onmouseover = function(){
+                        this.appendChild(tooltip);
+                        console.log(this)
+                    };
                     this.onmouseleave = function(){this.removeChild(tooltip)};
 
                 }
@@ -136,20 +140,27 @@
                     super();
                 }
                 render() {
+                    var parentModule = this.id;
                     var dropdown = document.createElement("div");
-                    dropdown.style="position:absolute;left:"+event.pageX+"px;"
-                    for (let module in modules) {
-                        console.log(module);
-                        let item = document.createElement("button")
-                        item.style = "text-color: white;"
+                    dropdown.style="position:absolute;left:"+(event.pageX-15)+"px;"
+                    for (var module in modules) {
+                        // console.log(module);
+                        var item = document.createElement("button")
+                        item.style = "text-color: white;"   
                         item.innerText = module;
-
-                        // item.onclick = function(){chain[module] = }
+                        item.id = module;
+                        
+                        item.onclick = function(){
+                            console.log(parentModule);
+                            chain[parentModule] = event.target.id;
+                            printChain();
+                        }
 
                         dropdown.appendChild(item);
                         dropdown.appendChild(document.createElement("br"));
+                        
                     }
-
+                    console.log("id: "+this.id);
                     this.appendChild(dropdown);
                 }
                 connectedCallback() {
@@ -165,15 +176,13 @@
                 constructor(){
                     super();
                 }
-                    
-                
-                
+
                 render() {
                     var button = document.createElement("button");
                     button.innerText = "add submodule";
 
-                    var dropdown = document.createElement("module-dropdown");
-
+                    var dropdown = Object.assign(document.createElement("module-dropdown"), {id: this.id});
+                    
 
                     this.onmouseover = function(){this.appendChild(dropdown)};
                     this.onmouseleave = function(){this.removeChild(dropdown)};
@@ -213,7 +222,36 @@
                     super();
                 }
                 render() {
+                    console.log("rendering: "+this.id+" module");
+
+                    var contents = document.createElement("div");
+                    contents.className = "moduleMain";
+
+                    var divider = document.createElement("span");
+                    divider.innerText = " | "
+
+                    var title = document.createElement("span");
+                    title.innerText = this.id + " | "
+                    contents.appendChild(title);
+
+                    if (modules[this.id].accepts_submodules){
+                        var addButton = Object.assign(document.createElement("add-button"), {id: this.id});
+                        // addButton.id = this.id;
+                        contents.appendChild(addButton);
+                        contents.appendChild(divider);
+                    }
                     
+
+                    for (const value of modules[this.id].params){
+                        var paramUI = (document.createElement("param-"))
+                        // console.log(value)
+                        paramUI.setAttribute("name", value);
+                        paramUI.setAttribute("info", "null");
+                        console.log(paramUI);
+                        contents.appendChild(paramUI);
+                    }
+
+                    this.appendChild(contents);
                 }
                 connectedCallback() {
                     if (!this.rendered) {
@@ -242,10 +280,8 @@
             customElements.define("canvas-", Canvas);
 
             var output = "";
-            // var canvas = document.createElement("div");
 
-            
-               
+                    
         </script>
     </head>
     <body>
@@ -254,29 +290,32 @@
             a <b>WIP</b> experiment to make a general-purpose editor for text-based modular software. The two things I woudl immediately be able to use this for are my own project, buffer-gen, and the melda algorithms. I'm sure there's other things, though. ill keep this updated with a changelog maybe? idk. 
         </p>
 
-        <expand-box hiddenText="show changelog" shownText="hide changelog" targetID="changelog"></expand-box>
+        <!-- BROKEN BROKED BROKEN OH SO BROKEN
+        
         <p id="changelog">changelog text (currently broken)</p>
+        <expand-box hiddenText="show changelog" shownText="hide changelog" targetID="changelog"></expand-box> -->
         
         <hr size="5px" color="black">
         <span>Editor</span><br><br>
         <!-- ------------------ -->
          
-        <div class="moduleMain" id="nuts">
-            <!-- <pre> -->
+        <!-- <div class="moduleMain" >
+            
                 nesting comb |
-                <add-button></add-button> | <!--placeholder for thing that draws connections to other modules-->
+                <add-button></add-button> | 
 
                 <param- info="amt between 0 and 1", name="feedback" ></param->
                 <param- info="time in ms", name="delay" ></param->
+        </div> -->
 
-            <!-- </pre> -->
-        </div>
+        <hr>
+        <module-main id="nesting_comb"></module-main>
 
         <hr size="5px" color="black">
         <span>Output:</span><br>
 
 
         <br>
-        
+        <button onclick="printChain()">print chain</button>
     </body>
 </html>
