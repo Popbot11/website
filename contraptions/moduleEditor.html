@@ -33,6 +33,14 @@
                 position: absolute;
                 background-color: aqua;
             }
+            .text_output{
+                margin: 10px;
+                padding: 10px;
+
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgb(35, 35, 35);
+                color: rgb(209, 209, 209);
+            }
             input {
                 min-width: 10px;
                 width: 6ch;
@@ -81,37 +89,82 @@
 
         <script>
             
+           
 
             class ModuleData {
-                constructor(params, accepts_submodules){
+                constructor(params, accepts_submodules, syntax_text){
                     
                     this.params = params;
                     this.accepts_submodules = accepts_submodules;
+                    this.syntax_text = syntax_text;
                     
                 }
             }
 
             var modulecount = 0;
-            // var currentModule = "";
 
+            // var currentModule = "";
+            
             //storing info for each module and how that works etc
             const modules = {
-                "base": new ModuleData([], true),
-                "level": new ModuleData(["gain"], false),
-                "level_sig": new ModuleData([], true),
-                "nesting_comb": new ModuleData(["delay", "feedback"], true),
-                "nesting_allpass": new ModuleData(["delay", "feedback", "q"], true),
-                "fdn": new ModuleData(["size"], true),
-                "parallel": new ModuleData([], true),
-
+                "serial": new ModuleData([], true, "s"),
+                "parallel": new ModuleData([], true, "p"),
+                "level": new ModuleData(["gain"], false, "l"),
+                "comb_nesting": new ModuleData(["delay", "feedback"], true, "cn"),
+                "comb_basic": new ModuleData(["delay", "feedback"], false, "c"),
+                "nesting_allpass": new ModuleData(["delay", "feedback", "q"], true, "an"),
+                "allpass_basic": new ModuleData(["delay", "feedback"], false, "a"),
+                "fdn": new ModuleData(["size"], true, "fdn"),
+                "hi_dampening": new ModuleData([], false, "fh"),
+                
             }
-
-
+            
+            
             // specifically info about wwhat modules take what other modules as inputs
+            // module_name: ["type", [submodule names], num, [parameters]]
             var chain = {
-                "base0": ["base", [], 0],
+                "serial0": ["serial", [], 0, []],
+            }
+            
+            //recursively navigate module tree to produce output algorithm
+            
+            // var outputText = "";
+            function output(targetModule){
+                console.log("------GENERATING OUTPUT------")
+                let outputCanvas = document.getElementById("output");
+
+                outputCanvas.innerText = getModule(targetModule)
+                console.log("------------DONE-------------")
             }
 
+            function getModule(targetSubmodule){
+                
+                let prefix_text = ""
+                console.log("rendering: "+targetSubmodule);
+                let base_text = modules[ chain[targetSubmodule][0] ].syntax_text;
+                let submodules_text = "";
+                if (modules[ chain[targetSubmodule][0] ].accepts_submodules){
+                    submodules_text = "["
+                    for (var chain_submodule of chain[targetSubmodule][1]){
+                        console.log("chain_submodule: "+chain_submodule)
+                        submodules_text += getModule(chain_submodule)+";"
+                    }
+                    submodules_text += "]"
+                }
+                let parameters_text = "";
+                
+                // if (modules[ chain[targetSubmodule][0] ].params.length != 0){
+                //     parameters_text += "(";
+                //     for (var i in modules[ chain[targetSubmodule][0] ].params){
+                //         parameters_text += chain[targetSubmodule][4][i]+";";
+                //     }
+                //     parameters_text += ")";
+                // }
+                
+                return prefix_text+base_text+parameters_text+submodules_text;
+            }
+
+            //util functions
             function updateUI(){
                 var canvas = document.getElementById("canvas")
                     var parent = canvas.parentNode;
@@ -134,11 +187,18 @@
                 render() {
                     var name = this.getAttribute("name");
                     var info = this.getAttribute("info");
-
+                    var param_index = this.getAttribute('data-param-index');
                     var numbox = document.createElement("input");
+
                     numbox.type="number";
                     numbox.name=name;
-                    numbox.onkeypress = function() {numbox.style.width = numbox.value.length + 5 + 'ch'};
+                    numbox.onkeypress = function() {
+                        numbox.style.width = numbox.value.length + 5 + 'ch'
+                    };
+                    numbox.onchange = function(){
+                        // console.log(this.value);
+                        chain[this.id][4][param_index] = this.value;
+                    };
 
                     var tooltip = document.createElement("span");
                     tooltip.class = "tooltip"
@@ -152,7 +212,7 @@
                     
                     this.onmouseover = function(){
                         this.appendChild(tooltip);
-                        console.log(this)
+                        // console.log(this)
                     };
                     this.onmouseleave = function(){this.removeChild(tooltip)};
 
@@ -166,6 +226,7 @@
             }
             customElements.define("param-", Parameter);
 
+            //ui for module list when hovered over add button
             class ModuleDropdown extends HTMLElement {
                 constructor(){
                     super();
@@ -174,7 +235,7 @@
                     var parentModule = this.id;
                     var dropdown = document.createElement("div");
                     dropdown.style="position:absolute;left:"+this.getAttribute('data-pos-x')+"px;"
-                    console.log(this.getAttribute('data-pos-x'))
+                    // console.log(this.getAttribute('data-pos-x'))
 
                     var fuck = this.getAttribute('data-num')
                     // console.log("dropdown num: "+fuck);
@@ -193,7 +254,14 @@
                             
                             chain[parentModule][1].push(event.target.id+modulecount);
                             chain[event.target.id+modulecount] = [event.target.id, [], modulecount];
-
+                            console.log(module);
+                            console.log(modules["level"]);
+                            for(var j in modules[module].params){
+                                modules[module].params.push("");
+                                
+                            }
+                            // chain[parentModule][4].length = modules[module].params.length;
+                            console.log("params_length: "+modules[module].params.length );
                             updateUI();
 
                         }
@@ -268,14 +336,12 @@
                     
                     deleteButton.onclick = function(){
                         console.log("removing: "+submoduleName+", "+submoduleIndex+" from "+supermoduleName);
-                        // printChain();
+
                         delete chain[submoduleName];
-                        console.log("hhh  "+chain[supermoduleName][1])
                         delete chain[supermoduleName][1][submoduleIndex];
                         chain[supermoduleName][1].length -= 1;
-                        console.log("jjj  "+chain[supermoduleName][1])
 
-                        // printChain();
+
                         updateUI();
                     }   
 
@@ -294,17 +360,17 @@
 
             //primary ui for singular module
             class ModuleMain extends HTMLElement {
+                
                 constructor(){
                     super();
                 }
                 render() {
+
+                    
                     // console.log(this.id)
                     this.setAttribute('data-num', chain[this.id][2]);
                     console.log(chain[this.id][2]+", "+this.id);
                     var selfName = this.id;
-                    
-                    // console.log("number: "+this.getAttribute('data-num'));
-                    // console.log("rendering: "+selfName);
                     
                     var contents = document.createElement("div");
                     contents.className = "moduleMain";
@@ -327,6 +393,7 @@
                         contents.appendChild(addButton);
 
                         // mini modules
+                        var debugText = "";
                         var i = 0;
                         for (var sub of chain[selfName][1]){
                             var submodule = Object.assign(document.createElement("module-mini"), {
@@ -337,24 +404,34 @@
 
                             contents.appendChild(submodule);
                             i += 1;
+                            debugText += ("submodule:"+i+", "+sub+"\n");
                         }
+                        if (i != 0){
+                            console.log(debugText);
+                        }
+                        
                         contents.appendChild(divider);
                     }
 
                     // render parameters 
-                    for (const value of modules[chain[this.id][0]].params){
+                    var param_index = 0;
+                    for (const param_name of modules[chain[this.id][0]].params){
                         var paramUI = (Object.assign(document.createElement("param-"), {
                             id: this.id, 
                             ['data-num']: this.num
                         }))
+                        paramUI.setAttribute('data-param-index', param_index)
                         // console.log(value)
-                        paramUI.setAttribute("name", value);
+                        paramUI.setAttribute("name", param_name);
                         paramUI.setAttribute("info", "null");
                         // console.log(paramUI);
                         contents.appendChild(paramUI);
+                        param_index += 1;
                     }
 
                     this.appendChild(contents);
+                    
+                    
                 }
                 connectedCallback() {
                     if (!this.rendered) {
@@ -371,12 +448,14 @@
                     super();
                 }
                 render() {
+                    console.log("-----RENDERING UI-----")
                     for (let module in chain){
                         // console.log("thingy: "+module);
                         var ui = Object.assign(document.createElement("module-main"), {id: module});
                         // ui.id = module.name;
                         this.appendChild(ui);
                     }
+                    console.log("-----FINISHED UI------")
                 }
                 connectedCallback() {
                     if (!this.rendered) {
@@ -387,7 +466,7 @@
             }
             customElements.define("canvas-", Canvas);
 
-            var output = "";
+
 
            
         </script>
@@ -423,10 +502,14 @@
         </div>
 
         <hr size="5px" color="black">
-        <span>Output:</span><br>
+        <div class="text_output"><span id="output"></span></div>
+        <button onclick="output('serial0')">render output</button><br>
+        <br>
 
 
         <br>
-        <button onclick="printChain()">print chain</button>
+        <span>debug:</span><br>
+        <button onclick="printChain()">log raw chain</button>
+        <button onclick="updateUI()">update ui</button>
     </body>
 </html>
