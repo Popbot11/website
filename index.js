@@ -32,12 +32,18 @@ function toggle() {
     if (incr === 350) {
         message.innerHTML = "go outside";
     }    
+    
 }
 
 function crazyMode() {
-    document.getElementById("body").classList.add("crazyMode")
+    if (confirm("are you sure you want to active crazy mode? this cannot be undone.")) {
+        // txt = "You pressed OK!";
+      } else {
+        alert("thank you for pressing cancel. now entering crazy mode!");
+      }
+    document.getElementById("body").classList.add("crazyMode");
 }
 function dripMode() {
-    document.getElementById("drip").hidden = false
-    document.getElementById("body").classList.add("dripMode")
+    document.getElementById("drip").hidden = false;
+    document.getElementById("body").classList.add("dripMode");
 }

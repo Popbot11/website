@@ -49,6 +49,13 @@
             overflow-x: visible;
             white-space: nowrap;
         }
+        .contraptionsInner{
+            width:  225px;
+            height: 250px;
+            overflow-y: scroll;
+            overflow-x: visible;
+            white-space: nowrap;
+        }
         .musicInner a:link{
             color:rgb(75, 238, 0);}
         .musicInner a:visited{
@@ -82,9 +89,22 @@
         .polyWall {
             clip-path: polygon(0% 5%, 0% 100%, 100% 95%, 70% 20%, 50% 0%);
             background-image: url(other/media/wall.jpg);
+
         }
         .crazyMode{
             scale: 105%;
+        }
+        .drippyButton{
+            transform: translateX(90px) rotate(85deg);
+            animation-name: drippyButton;
+            animation-duration: 10s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        @keyframes drippyButton {
+            0% {transform: translateX(95px) rotate(85deg);}
+            50% {transform: translateX(95px) rotate(65deg);}
+            100%{transform: translateX(95px) rotate(85deg);}
         }
         .dripMode{
             background-image:url(other/media/skull-laughter.gif);
@@ -134,7 +154,6 @@
             animation-duration: 30s;
             animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
-
         }
         .derotate{
             transform: rotate(0deg);
@@ -190,7 +209,7 @@
                     <a class="date">11/9/24</a> - <a href="music/inventionForTub.html">invention for Tub</a><br>
                     <!-- <a class="date">9/13/24</a> - <a href="music/ambiences.html">ambiences</a><br> -->
                     <a class="date">8/30/24</a> - <a href="music/crazyn7uts.html">crazyn7uts</a><br>
-                    <a class="date">8/23/24</a> - <a href="music/precision.html">Precision</a><br>
+                    <a class="date">8/23/24</a> - <a href="music/precision.html">Precision</a><button onclick="dripMode()" align="right" class="drippyButton">enter Drip Mode</button><br>
                     <a class="date">~8/20/24</a> - EP - <a href="music/creatureEP.html">Creature</a><br>    
                     <a class="date">8/17/24</a> -  <a href="music/anv9.html">All Nighter Vol. 9</a><br>      
                     <a class="date">7/7/24</a> - <a href="music/Helicity.html">Helicity</a><br>  
@@ -222,7 +241,7 @@
                 </div>
             </div>
             <div style="float: left;">
-                <div style="background-image: url(other/media/gradient.png); padding: 15px; color: rgb(255, 225, 185);">
+                <div class="contraptionsInner" style="background-image: url(other/media/gradient.png); padding: 15px; color: rgb(255, 225, 185); z-index: 50;">
                     <h2 style="color:rgb(0, 0, 0)">contraptions</h2>
                     medium - <a href="">link</a> - (other info)<br>
                     <hr>
@@ -232,18 +251,18 @@
                     m4l - <a href="contraptions/rick.html">rick</a><br>
                     m4l - <a href="contraptions/noiseInjection.html">noise injection</a><br>
                     m4l - <a href="contraptions/filterCrazy.html">filter crazy</a><br>
-                    m4l - <a href="contraptions/modalSynth.html">modal synth</a> ($20)<marquee loop="0" width="100px" style="position:absolute;"><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
+                    m4l - <a href="contraptions/modalSynth.html">modal synth</a> ($20)<marquee loop="0" width="100px" ><img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"></marquee><br>
                     add-on - <a href="contraptions/combobulatorModels.html">combobulator brains</a> ($33)<br>
                     m4l - <a href="contraptions/johnFeedbackExplorer.html">John feedback explorer</a><br>
                     m4l - <a href="contraptions/25ParallelDelays.html">25 parallel delays</a><br>
                     m4l - <a href="contraptions/badReverb.html">bad reverb</a><br>
                     m4l - <a href="contraptions/batteryMuncher.html">battery muncher</a><br>
 
-                    
-                </div>  <br><br>
-                <div class="rotate" style="background-image:  url(other/media/liveTexture.png); padding-left: 20px; padding-top: 10px; margin-left: 10px;">
+                    <br>
+                </div>  
+                <div class="rotate" style="position: relative; background-image:  url(other/media/liveTexture.png); padding-left: 20px; padding-top: 10px; margin-left: 10px;margin-right: 30px; z-index: -1;">
                     <div class="derotate" >
-                        <h2>video</h2><p>under construction</p>
+                        <span style="font-size: 30px;">video</span><br><span style="line-height: 150%;">under construction</span><br>
                         > <a href="video/livestreams.html">livestreams list</a> (102) <br>
                         > <a href="video/tutorials.html">tutorials</a> (14) <br>
                         > <a href="video/miscAudio.html">misc audio</a><br>
@@ -251,7 +270,7 @@
                     </div>
                 </div>
                 
-                <button style="width: 140%; margin-left: 20%; transform: rotate(-5deg); text-align: end;"> <a href="//tools.digitalpoint.com/counter" target="_blank"><img src="//count.digitalpoint.com/?t=golfclubs" alt="Free Hit Counter" style="border:0px;width:100px;height:15px;"></a></button>
+                <!-- <button style="width: 140%; margin-left: 20%; transform: rotate(-5deg); text-align: end;"> <a href="//tools.digitalpoint.com/counter" target="_blank"><img src="//count.digitalpoint.com/?t=golfclubs" alt="Free Hit Counter" style="border:0px;width:100px;height:15px;"></a></button> -->
                 
                 <!--<div class="crazyGradient"></div>-->
                 <div width="100%" align="cener" style="text-align: center; color: rgba(0, 0, 0, 0.158); font-family: Georgia, 'Times New Roman', Times, serif;">owo</div>
@@ -259,35 +278,52 @@
         
             <div class="mainCol">  
                 <div class="other" style="padding: 15px; background-color: rgba(29, 35, 69, 0.801);">
-                    <div class="otherBG" style="pointer-events: none; position: absolute; width: 100px; background-color: rgba(0, 0, 0, 0.141);">
-                    </div>
-                    <h2 style="color: chartreuse;">Other</h2>
-                        <a href="other/musicList.html">music i like</a> <br>
-                        <a href="other/wips.html">unreleased music</a><br>
-                        <a href="other/pageTest.html" target="_blank">test page</a><br>
-                        <a href="other/coolPeople.html">cool people</a><br>
-                        <a href="other/pressKit.html">press kit</a><br>
-                        <a href="other/oldWebsite.html">old website</a><br>
+                    <div class="otherBG" style="pointer-events: none; position: absolute; width: 100px; background-color: rgba(0, 0, 0, 0.141);"></div>
                     
+                    <h2 style="color: chartreuse;">Other</h2>
+                    <a href="other/musicList.html">music i like</a> <br>
+                    <a href="other/wips.html">unreleased music</a><br>
+                    <a href="other/pageTest.html" target="_blank">test page</a><br>
+                    <a href="other/coolPeople.html">cool people</a><br>
+                    <a href="other/pressKit.html">press kit</a><br>
+                    
+                    <a href="other/oldWebsite.html">old website</a><br>
+                    
+                </div><br>
+                
+                <button onclick="crazyMode()" style="transform: translateY(-10px) translateX(20px);">enter Crazy Mode</button> <br>
+
+                <div class="ic" style="position: absolute; width: 150px; height: 50px; position: absolute;  background-image: linear-gradient(red 0%, rgba(255, 0, 123, 0.276) 10%, rgba(0, 0, 0, 0) 100%);"></div>
+                    <b style="font-size: 25px; margin: 10px">contact</b>
+                    <div class="contact" style="background-image: radial-gradient(rgb(0, 0, 255), rgb(255, 166, 0)); padding-bottom: 40px;">
+                        <a href="other/email.html" target="_blank">Email</a><br>
+                        <a href="https://discord.gg/RpZ4dt9mUr" target="_blank">Discord Server</a><br>
+                        <a href="other/lessons.html">lessons info</a> <img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"><br>
+                        <a href="https://earth.google.com/web/@-1.02273465,-119.18109438,-4100.55618263a,1019.21527724d,35y,54.86475516h,0t,0r/data=OgMKATA" target="_blank">1°01'24"S 119°10'51"W</a><br>
+                    </div>
                 </div>
-                <img src="other/media/88x31javascriptfree.gif"><img src="other/media/88x31lies(false).gif">
                 
                     <!-- <div style="margin-left: 20%; background-color: rgba(137, 206, 97, 0.664); width: 20%; height:2in; transform: translateY(-10px);"></div>  --> <!--vertical recyangular thing-->
                     
             </div>
             
+            
             <div class="mainCol" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ">
-                <h2>elsewhere</h2>
+                <!-- <h2>elsewhere</h2> -->
+                
                 <div class="polyWall">
-                    <h3>music</h3>
-                    <a href="https://soundcloud.com/popbot1" target="_blank">Soundcloud</a><br>
-                    <a href="https://open.spotify.com/artist/4eDbD4oyIs9osobAAkkh0T" target="_blank">Spotify</a><br>
-                    <a href="https://popbotmusic.bandcamp.com/" target="_blank">Bandcamp</a><br>
-                    <a href="https://popbot2.newgrounds.com/" target="_blank">Newgrounds</a><br>
-                    <a href="https://www.audioalien.app/artist/1448822/popbot" target="_blank">AudioAleien</a><br>
-                    <br>
+                    <div style="opacity: 1.5;">
+                        <b>music external</b><br>
+                        
+                        <a href="https://soundcloud.com/popbot1" target="_blank">Soundcloud</a><br>
+                        <a href="https://open.spotify.com/artist/4eDbD4oyIs9osobAAkkh0T" target="_blank">Spotify</a><br>
+                        <a href="https://popbotmusic.bandcamp.com/" target="_blank">Bandcamp</a><br>
+                        <a href="https://popbot2.newgrounds.com/" target="_blank">Newgrounds</a><br>
+                        <a href="https://www.audioalien.app/artist/1448822/popbot" target="_blank">AudioAleien</a><br>
+                        <br>
+                    </div>
                 </div>
-
+                
                 <div class="media">
                     <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -20px; transform: rotateZ(2deg); "></div>
                     <div class="ic" style="position: absolute; background-color: rgba(81, 222, 0, 0.150); width: 125; height: 140px; margin-left: -25px; transform: rotateZ(356deg); "></div>
@@ -298,25 +334,16 @@
                     <a href="https://bsky.app/profile/popbot.work" target="_blank" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Bluesky</a><br>
                     <a href="https://www.instagram.com/popbot_/?hl=af" target="_blank">Instagram</a><br>
                     <a href="https://www.youtube.com/channel/UCckNFTtfD7FKCqbTE5UBVPw" target="_blank" style="color: blue;">Youtube Channel</a><br>
-                    <a href="https://github.com/Popbot11" target="_blank">github</a> <div class="tooltip">hover for tooltip<span class="tooltiptext">my github is pretty innactive; the only things on there are the code for this website (it's public since i'm using github pages to host it) and maybe some other projects. most of my stuff is in a private repository. i am still a little baby when it comes to programming </span></div>
+                    <a href="https://github.com/Popbot11" target="_blank">github</a> <div class="tooltip" style="font-size: smaller;">tooltip<span class="tooltiptext">my github is pretty innactive; the only things on there are the code for this website (it's public since i'm using github pages to host it) and maybe some other projects. most of my stuff is in a private repository. i am still a little baby when it comes to programming </span></div>
                 </div>
                 <br><hr>
-                <div class="ic" style="position: absolute; width: 200px; height: 100px;  background-image: linear-gradient(red 0%, rgba(255, 0, 123, 0.276) 10%, rgba(0, 0, 0, 0) 100%);"></div>
-                <h3 style="font-family: 'Courier New', Courier, monospace;">contact</h3>
-                <div class="contact" style="background-image: radial-gradient(rgb(0, 0, 255), rgb(255, 166, 0)); padding-bottom: 40px;">
-                    <a href="other/email.html" target="_blank">Email</a><br>
-                    <a href="https://discord.gg/RpZ4dt9mUr" target="_blank">Discord Server</a><br>
-                    <a href="other/lessons.html">lessons info</a> <img src="other/media/arrow.jpg" height="20px" width="60px" style="vertical-align: middle;"><br>
-                    <a href="https://earth.google.com/web/@-1.02273465,-119.18109438,-4100.55618263a,1019.21527724d,35y,54.86475516h,0t,0r/data=OgMKATA" target="_blank">1°01'24"S 119°10'51"W</a><br>
+                <div style="position: fixed; transform: translateX(-25px);"><a href="https://minor-locrian.neocities.org/" target="_blank"><img src="other/media/88x31javascriptfree.gif" ></a><img src="other/media/88x31lies(false).gif"></div>
                 
-                </div>
-            </div>
 
             
         </div>
         <div align="right">
-            <button onclick="crazyMode()" align="right">enter Crazy Mode</button> 
-            <button onclick="dripMode()" align="right">enter Drip Mode</button> 
+            
             <!-- <div class="ic" align="right"  style="transform: translateY(-30px);"><a><img src='https://www.free-website-hit-counter.com/c.php?d=9&id=171701&s=37' border='0' alt='Free Website Hit Counter'></a></div> -->
         </div>    
         <div style="float:left;  width: 100%;">   
