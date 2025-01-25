@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <style>
+
+
+        </style>
+        <script>
+            // e_ vars are elements 
+            // i_ functions corrospond to things happen only if certain requirements are met
+            
+            let clicks = {
+                normal: 0,
+                water: 0,
+                fire: 0,
+                lightning: 0,
+                poison: 0,
+                spirit: 0
+            }
+            class Item {
+                constructor(price, name, purchased = false){
+                    this.price = price;
+                    this.name = name;
+                    this.purchased = purchased;
+                }
+            }
+            let items = {
+                'shop': new Item(50, "shop"),
+                'double_click': new Item(10, "double click"),
+                'triple_click': new Item(30, "triple click"),
+            }
+            function purchase_item(name){
+                items[name].purchased = true;
+                console.log("purchased item: "+name)
+            }   
+
+
+            function update_ui(){
+                var e_counter = document.getElementById("counter");
+                e_counter.innerText = clicks.normal;
+
+                var e_shop = document.getElementById("shop");
+                for (var item in items){
+                    let e_item_ui = document.createElement("span")
+                    e_item_ui.innerText += items[item].price + ", "+items[item].name+"\n";
+
+                    let e_button = document.createElement("button");
+                    console.log("making button: "+item)
+                    e_button.onclick = function(){
+                        purchase_item(this.id);
+                    }
+                    e_button.id = item;
+                    e_button.innerText = "buy"
+                    
+                    e_shop.appendChild(e_button);
+                    e_shop.appendChild(e_item_ui);
+                }
+                
+            }
+
+            function i_triple_click(){
+                if (items['triple_click'].purchased){
+                    clicks.normal += 1;
+                }
+            }
+            function i_double_click(){
+                if (items['double_click'].purchased){
+                    clicks.normal += 1;
+                    
+                }
+            }
+   
+            function button_click() {
+                clicks.normal += 1;
+                i_double_click(); //multiplies click power by two
+                i_triple_click(); //multiplies click power by three
+                if (clicks.normal >= 50){
+                    items['shop'].purchased = true;
+                    console.log("penits")
+                }
+
+                update_ui();
+            }
+
+            
+
+            
+            
+        </script>
+    </head>
+    <body>
+        <button onclick="button_click()"><h2>click</h2></button><br>
+        
+        <span id="counter"></span>
+        <div id="shop"></div>
+
+    </body>
+</html>
