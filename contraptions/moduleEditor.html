@@ -167,13 +167,13 @@
             //util functions
             function updateUI(){
                 var canvas = document.getElementById("canvas")
-                    var parent = canvas.parentNode;
-                    parent.removeChild(canvas);
-                    parent.appendChild(
-                        Object.assign(document.createElement("canvas-"), {
-                            id: "canvas", 
-                        })
-                    )
+                var parent = canvas.parentNode;
+                parent.removeChild(canvas);
+                parent.appendChild(
+                    Object.assign(document.createElement("canvas-"), {
+                        id: "canvas", 
+                    })
+                )
             }
             function printChain(){
                 console.log(chain);
