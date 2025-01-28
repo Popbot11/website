@@ -31,6 +31,7 @@
                 if (clicks.normal >= items[name].price){
                     items[name].quantity += 1;
                     clicks.normal -= items[name].price;
+                    items[name].price = Math.floor(items[name].price*1.2);
                     console.log("purchased item: "+name)
                     update_ui();
                     update_counter();
@@ -50,7 +51,7 @@
                 e_shop.innerHTML = ""
                 for (var item in items){
                     let e_item_ui = document.createElement("span")
-                    e_item_ui.innerText += "$T"+items[item].price + ", "+items[item].name+", "+items[item].quantity+"\n";
+                    e_item_ui.innerText += "$"+items[item].price + ", "+items[item].name+", "+items[item].quantity+"\n";
 
                     let e_button = document.createElement("button");
                     console.log("\tmaking button: "+item)
@@ -83,6 +84,10 @@
 
                 update_counter();
             }
+            function add_clicks(amt){
+                clicks.normal += amt;
+                update_counter();
+            }
 
             
 
@@ -95,6 +100,10 @@
             <button onclick="button_click()"><h2>click</h2></button><br>
             <span id="counter"></span>
             <div id="shop"></div>
+            <hr>
+            <span>debug:</span><br>
+            <button onclick="add_clicks(1000)">+1000 normal</button>
+            
         </div>
     </body>
 </html>
