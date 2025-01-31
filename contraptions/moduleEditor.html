@@ -109,9 +109,39 @@
             const modules = {
                 "serial": new ModuleData([], true, "s"),
                 "parallel": new ModuleData([], true, "p"),
-                "level": new ModuleData(["gain"], false, "l"),
-                "comb_nesting": new ModuleData(["delay", "feedback"], true, "cn"),
-                "comb_basic": new ModuleData(["delay", "feedback"], false, "c"),
+                "level": new ModuleData([
+                    `gain
+                     in dB
+                     When there is no gain specified, it does nothing, literally. 
+                     That way it can be used as a dummy module which is sometimes useful for more complex algorithms. 
+                     
+                     for example, a value of -3 makes the signal quieter by 3 dB.`], false, "l"),
+                "comb_nesting": new ModuleData([
+                    `decay coefficient
+                     if left blank, defaults to a value of 1, which means that it will follow the length parameter within the Plugin UI. 
+                     you can invert the phase by setting it to -1 (or any negative value). 
+                     if you specify 0, the parameter will be randomized. 
+
+                     in general, this parameter represents the specific value that a signal is multiplied by each time it is fed back into the delay line in a comb filter. 
+                     (reverb length is calculated based on how long it takes to decay below -60dBFS)`, 
+                     
+                     `feedback time
+                      in ms
+                      this value represents the length of the delay line that the signal is fed back into. 
+                      `], true, "cn"),
+                "comb_basic": new ModuleData([
+                    `decay coefficient
+                     if left blank, defaults to a value of 1, which means that it will follow the length parameter within the Plugin UI. 
+                     you can invert the phase by setting it to -1 (or any negative value). 
+                     if you specify 0, the parameter will be randomized. 
+
+                     in general, this parameter represents the specific value that a signal is multiplied by each time it is fed back into the delay line in a comb filter. 
+                     (reverb length is calculated based on how long it takes to decay below -60dBFS)`, 
+                     
+                     `feedback time
+                      in ms
+                      this value represents the length of the delay line that the signal is fed back into. 
+                      `], false, "c"),
                 "nesting_allpass": new ModuleData(["delay", "feedback", "q"], true, "an"),
                 "allpass_basic": new ModuleData(["delay", "feedback"], false, "a"),
                 "fdn": new ModuleData(["size"], true, "fdn"),
