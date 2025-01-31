@@ -153,13 +153,15 @@
                 }
                 let parameters_text = "";
                 
-                // if (modules[ chain[targetSubmodule][0] ].params.length != 0){
-                //     parameters_text += "(";
-                //     for (var i in modules[ chain[targetSubmodule][0] ].params){
-                //         parameters_text += chain[targetSubmodule][4][i]+";";
-                //     }
-                //     parameters_text += ")";
-                // }
+                if (modules[ chain[targetSubmodule][0] ].params.length != 0){
+                    console.log("ballsack supreme mega ultra suprise COMING RIGHT UP")
+                    // console.log(chain[targetSubmodule][3][0])
+                    parameters_text += "(";
+                    for (var i in modules[ chain[targetSubmodule][0] ].params){
+                        parameters_text += chain[targetSubmodule][3][i]+";";
+                    }
+                    parameters_text += ")";
+                }
                 
                 return prefix_text+base_text+parameters_text+submodules_text;
             }
@@ -188,16 +190,20 @@
                     var name = this.getAttribute("name");
                     var info = this.getAttribute("info");
                     var param_index = this.getAttribute('data-param-index');
-                    var numbox = document.createElement("input");
 
+                    var owner_module = this.id;
+                    // var self_value = this.value;
+                    
+                    var numbox = document.createElement("input");
                     numbox.type="number";
                     numbox.name=name;
+                    numbox.value = this.getAttribute('data-param-value');
                     numbox.onkeypress = function() {
                         numbox.style.width = numbox.value.length + 5 + 'ch'
                     };
                     numbox.onchange = function(){
-                        // console.log(this.value);
-                        chain[this.id][4][param_index] = this.value;
+                        console.log("on param change: "+chain[owner_module]);
+                        chain[owner_module][3][param_index] = numbox.value;
                     };
 
                     var tooltip = document.createElement("span");
@@ -253,7 +259,7 @@
                             modulecount += 1;
                             
                             chain[parentModule][1].push(event.target.id+modulecount);
-                            chain[event.target.id+modulecount] = [event.target.id, [], modulecount];
+                            chain[event.target.id+modulecount] = [event.target.id, [], modulecount, Array(modules[module].params.length)];
                             console.log(module);
                             console.log(modules["level"]);
                             for(var j in modules[module].params){
@@ -420,6 +426,7 @@
                             id: this.id, 
                             ['data-num']: this.num
                         }))
+                        paramUI.setAttribute('data-param-value', chain[this.id][3][param_index])
                         paramUI.setAttribute('data-param-index', param_index)
                         // console.log(value)
                         paramUI.setAttribute("name", param_name);
