@@ -188,7 +188,12 @@
                     // console.log(chain[targetSubmodule][3][0])
                     parameters_text += "(";
                     for (var i in modules[ chain[targetSubmodule][0] ].params){
-                        parameters_text += chain[targetSubmodule][3][i]+";";
+                        if (chain[targetSubmodule][3][i] === undefined){
+                            parameters_text += " ";
+                        } else {
+                            parameters_text += chain[targetSubmodule][3][i]+";";
+                        }
+                        
                     }
                     parameters_text += ")";
                 }
@@ -503,9 +508,6 @@
             }
             customElements.define("canvas-", Canvas);
 
-
-
-           
         </script>
     </head>
     <body>
@@ -514,37 +516,19 @@
             a <b>WIP</b> experiment to make a general-purpose editor for text-based modular software. The two things I woudl immediately be able to use this for are my own project, buffer-gen, and the melda algorithms. I'm sure there's other things, though. ill keep this updated with a changelog maybe? idk. 
         </p>
 
-        <!-- BROKEN BROKED BROKEN OH SO BROKEN
-        
-        <p id="changelog">changelog text (currently broken)</p>
-        <expand-box hiddenText="show changelog" shownText="hide changelog" targetID="changelog"></expand-box> -->
-        
         <hr size="5px" color="black">
-        <span>Editor</span><br><br>
-        <!-- ------------------ -->
-         
-        <!-- <div class="moduleMain" >
-            
-                nesting comb |
-                <add-button></add-button> | 
+        <span>Editor</span><br><br><hr>
 
-                <param- info="amt between 0 and 1", name="feedback" ></param->
-                <param- info="time in ms", name="delay" ></param->
-        </div> -->
 
-        <hr>
-        <!-- <module-main id="base"></module-main> -->
         <div>
-         <canvas- id="canvas"></canvas->
+            <canvas- id="canvas"></canvas->
         </div>
 
         <hr size="5px" color="black">
         <div class="text_output"><span id="output"></span></div>
-        <button onclick="output('serial0')">render output</button><br>
-        <br>
+        <button onclick="output('serial0')">render output</button><br><br><br>
 
 
-        <br>
         <span>debug:</span><br>
         <button onclick="printChain()">log raw chain</button>
         <button onclick="updateUI()">update ui</button>
