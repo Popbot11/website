@@ -7,14 +7,27 @@
             // e_ vars are elements 
             // i_ functions corrospond to things happen only if certain requirements are met
             
-            let clicks = {
-                normal: 0,
-                water: 0,
-                fire: 0,
-                lightning: 0,
-                poison: 0,
-                spirit: 0
+            class Currency {
+                constructor(quantity = 0){
+                    this.quantity = quantity;
+                }
+
+                get_quantity() {return this.quantity;}
+
+                increment(value = 1){
+                    this.quantity += value;
+
+                    return this.quantity; 
+                }
             }
+
+            let clicks = new Currency();
+            let water = new Currency();
+            let fire = new Currency();
+            let lightning = new Currency();
+            let poison = new Currency();
+            let spirit = new Currency();
+
             class Item {
                 constructor(price, diplay_threshold, name, quantity = 0){
                     this.price = price;
@@ -28,7 +41,7 @@
                 'auto_toggle': new Item(50, 10, "auto toggle"),
             }
             function purchase_item(name){
-                if (clicks.normal >= items[name].price){
+                if (clicks.get_quantity() >= items[name].price){
                     items[name].quantity += 1;
                     clicks.normal -= items[name].price;
                     items[name].price = Math.floor(items[name].price*1.2);
@@ -39,10 +52,10 @@
             }   
 
             function update_counter(){
-                console.log("drawing counter")
                 var e_counter = document.getElementById("counter");
-                e_counter.innerText = clicks.normal;
+                e_counter.innerText = clicks.get_quantity();
             }
+
             function update_ui(){
                 console.log("----UPDATE UI----")
 
@@ -69,28 +82,28 @@
                 
             }
 
-            function i_double_click(){
-                clicks.normal += items['double_click'].quantity;                 
-            }
+            
    
             function button_click() {
-                clicks.normal += 1;
-                i_double_click(); //multiplies click power by two
+                clicks.increment();
+                clicks.increment(items['double_click'].quantity); //multiplies click power by number of owned doule click shop items. 
 
                 //IMPORTANT: MAKE THIS THRESHOLD 50 FOR ACTUAL THING
-                if (clicks.normal == 10){
+                if (clicks.get_quantity() == 10){
                     update_ui();
                 }
 
                 update_counter();
             }
-            function add_clicks(amt){
-                clicks.normal += amt;
+            function add_clicks(type, amt){
+                console.log(type);
+                type += amt;
                 update_counter();
             }
 
             
-
+            
+           
             
             
         </script>
@@ -102,7 +115,7 @@
             <div id="shop"></div>
             <hr>
             <span>debug:</span><br>
-            <button onclick="add_clicks(1000)">+1000 normal</button>
+            <button onclick="add_clicks(clicks, 1000)">+1000 normal</button>
             
         </div>
     </body>
