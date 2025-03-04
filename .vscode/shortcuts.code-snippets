@@ -15,12 +15,12 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	{
-		"key": "alt+m",                          // whatever keybinding you want
-		"command": "editor.action.insertSnippet",
-		"when": "editorHasSelection  && editorLangId == html",
-		"args": {
-			"snippet": "<a href=\"${CLIPBOARD}\">${TM_SELECTED_TEXT}<\/a>"
-		
-	}
+	"make_link": {
+		"scope": "html",
+		"body": ["<a href=\"${CLIPBOARD}\">${TM_SELECTED_TEXT}$0<\/a>"]
+	},
+	"make_external_link": {
+		"scope": "html",
+		"body": ["<a href=\"${CLIPBOARD}\" target=\"_blank\">${TM_SELECTED_TEXT}$0<\/a>"]
+	}		
 }
